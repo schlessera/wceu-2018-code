@@ -3,6 +3,7 @@
 namespace WordCampEurope\Workshop\Block;
 
 use WordCampEurope\Workshop\Asset;
+use WordCampEurope\Workshop\SocialNetwork\FeedFactory;
 
 final class SocialMediaMentions extends GutenbergBlock {
 
@@ -76,5 +77,17 @@ final class SocialMediaMentions extends GutenbergBlock {
 	 */
 	protected function get_frontend_view(): string {
 		return self::FRONTEND_VIEW;
+	}
+
+	/**
+	 * Get the contextual data with which to render the frontend.
+	 *
+	 * @return array Associative array of contextual data.
+	 */
+	protected function get_frontend_context(): array {
+		$network = $this->get_network_name();
+		$feed    = ( new FeedFactory )->create( $network );
+
+		return [ 'feed_entries' => $feed->get_entries() ];
 	}
 }

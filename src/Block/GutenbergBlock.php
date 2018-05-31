@@ -45,7 +45,7 @@ abstract class GutenbergBlock implements Registerable, Renderable {
 	 * @return void
 	 */
 	public function register() {
-		//$this->enqueue_fields_assets();
+		$this->enqueue_fields_assets();
 		$this->register_assets();
 		$this->register_block();
 	}
@@ -62,6 +62,8 @@ abstract class GutenbergBlock implements Registerable, Renderable {
 			$this->get_frontend_view(),
 			EscapeContext::POST
 		);
+
+		$context = array_merge( $context, $this->get_frontend_context() );
 
 		return $view->render( $context );
 	}
@@ -92,7 +94,7 @@ abstract class GutenbergBlock implements Registerable, Renderable {
 				new Asset\Location\Minifiable(
 					new Asset\Location\Relative( 'assets/css/middleware-editor.css' )
 				),
-				[ 'wp-blocks' ]
+				[]
 			),
 		];
 	}
@@ -191,4 +193,11 @@ abstract class GutenbergBlock implements Registerable, Renderable {
 	 * @return string Relative location of the frontend view.
 	 */
 	abstract protected function get_frontend_view(): string;
+
+	/**
+	 * Get the contextual data with which to render the frontend.
+	 *
+	 * @return array Associative array of contextual data.
+	 */
+	abstract protected function get_frontend_context(): array;
 }

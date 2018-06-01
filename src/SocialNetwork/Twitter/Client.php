@@ -27,6 +27,14 @@ final class Client {
 		$this->credentials = $credentials;
 	}
 
+	/**
+	 * Get a feed of mentions for a given Twitter user.
+	 *
+	 * @param string $user  User to search for mentions.
+	 * @param int    $limit Limit the result set to this number.
+	 *
+	 * @return array Array of mentions for the given user.
+	 */
 	public function get_feed( string $user, int $limit ) {
 		$getfield = "?q={$user}&count={$limit}";
 		$twitter  = new TwitterAPIExchange( $this->credentials->get_client_settings() );

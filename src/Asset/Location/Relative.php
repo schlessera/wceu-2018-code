@@ -29,7 +29,7 @@ final class Relative implements Location {
 	 * @return string Absolute client-side URI.
 	 */
 	public function get_uri(): string {
-		return trailingslashit( WCEU_2018_WORKSHOP_PLUGIN_URL )
+		return trailingslashit( plugins_url( null, dirname( __FILE__, 3 ) ) )
 		       . ltrim( $this->relative_location, '/' );
 	}
 
@@ -39,7 +39,7 @@ final class Relative implements Location {
 	 * @return string Absolute filesystem path.
 	 */
 	public function get_path(): string {
-		return trailingslashit( WCEU_2018_WORKSHOP_PLUGIN_DIR )
+		return trailingslashit( dirname( __DIR__, 3 ) )
 		       . ltrim( $this->relative_location, '/' );
 	}
 }

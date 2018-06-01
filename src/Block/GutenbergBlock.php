@@ -34,8 +34,8 @@ abstract class GutenbergBlock implements Registerable, Renderable {
 	 *
 	 * @param ViewFactory $view_factory Optional. View factory to use.
 	 */
-	public function __construct( ViewFactory $view_factory = null ) {
-		$this->view_factory = $view_factory ?? new ViewFactory();
+	public function __construct( ViewFactory $view_factory ) {
+		$this->view_factory = $view_factory;
 		$this->assets       = $this->get_assets();
 	}
 

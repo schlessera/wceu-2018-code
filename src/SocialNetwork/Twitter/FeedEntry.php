@@ -7,13 +7,18 @@ use WordCampEurope\Workshop\SocialNetwork\FeedEntry as FeedEntryInterface;
 
 final class FeedEntry implements FeedEntryInterface {
 
+	private $element;
+	public function __construct( $element ) {
+		$this->element = $element;
+	}
+
 	/**
 	 * Get the content of the feed entry.
 	 *
 	 * @return string Content of the feed entry.
 	 */
 	public function get_content(): string {
-		// TODO: Implement get_content() method.
+		return $this->element->text;
 	}
 
 	/**

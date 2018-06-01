@@ -2,10 +2,26 @@
 
 namespace WordCampEurope\Workshop\SocialNetwork;
 
-class FeedFactory {
+use WordCampEurope\Workshop\Config;
+use WordCampEurope\Workshop\Exception\MissingConfigKey;
 
-	const NETWORK_TWITTER  = 'twitter';
-	const NETWORK_FACEBOOK = 'facebook';
+final class FeedFactory {
+
+	/**
+	 * Array of Config objects for the individual networks.
+	 *
+	 * @var array
+	 */
+	private $configs;
+
+	/**
+	 * Instantiate a FeedFactory object.
+	 *
+	 * @param array $configs
+	 */
+	public function __construct( array $configs ) {
+		$this->configs = $configs;
+	}
 
 	/**
 	 * Simple factory to create a network feed object for a given network.
@@ -15,12 +31,17 @@ class FeedFactory {
 	 * @return Feed Feed object for the requested network.
 	 */
 	public function create( string $network ) {
+		if ( ! array_key_exists( $network, $this->configs ) ) {
+			throw MissingConfigKey::from_network( $network );
+		}
 		switch ( $network ) {
-			case static::NETWORK_FACEBOOK:
+			case Feed::NETWORK_FACEBOOK:
 				//return new Facebook\Feed();
-			case static::NETWORK_TWITTER:
+			case Feed::NETWORK_TWITTER:
 			default:
-				return new Twitter\Feed();
+				return new Twitter\Feed(
+					new Twitter\Client( $this->configs[ $network ] )
+				);
 		}
 	}
 }

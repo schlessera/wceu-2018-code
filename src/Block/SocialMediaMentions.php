@@ -3,7 +3,9 @@
 namespace WordCampEurope\Workshop\Block;
 
 use WordCampEurope\Workshop\Asset;
+use WordCampEurope\Workshop\SocialNetwork\Feed;
 use WordCampEurope\Workshop\SocialNetwork\FeedFactory;
+use WordCampEurope\Workshop\View\ViewFactory;
 
 final class SocialMediaMentions extends GutenbergBlock {
 
@@ -14,6 +16,27 @@ final class SocialMediaMentions extends GutenbergBlock {
 	const BLOCK_CSS        = 'mentions-block';
 
 	const FRONTEND_VIEW = 'templates/social-media-mentions';
+
+	/**
+	 * Feed factory to use.
+	 *
+	 * @var FeedFactory
+	 */
+	private $feed_factory;
+
+	/**
+	 * Instantiate a SocialMediaMentions object.
+	 *
+	 * @param FeedFactory $feed_factory Feed factory to use.
+	 * @param ViewFactory $view_factory View factory to use.
+	 */
+	public function __construct(
+		FeedFactory $feed_factory,
+		ViewFactory $view_factory
+	) {
+		$this->feed_factory = $feed_factory;
+		parent::__construct( $view_factory );
+	}
 
 	/**
 	 * Get an array of Enqueueable assets.
@@ -86,8 +109,29 @@ final class SocialMediaMentions extends GutenbergBlock {
 	 */
 	protected function get_frontend_context(): array {
 		$network = $this->get_network_name();
-		$feed    = ( new FeedFactory )->create( $network );
+		$user    = $this->get_user();
+		$limit   = $this->get_limit();
+		$feed    = $this->feed_factory->create( $network );
 
-		return [ 'feed_entries' => $feed->get_entries() ];
+		return [
+			'feed_entries' => $feed->get_entries( $user, $limit )
+		];
+	}
+
+	/**
+	 * Get the network name to use for instantiating the feed.
+	 *
+	 * @return string Name of the social network to use.
+	 */
+	private function get_network_name(): string {
+		return Feed::NETWORK_TWITTER;
+	}
+
+	private function get_user(): string {
+		return 'schlessera';
+	}
+
+	private function get_limit(): int {
+		return 10;
 	}
 }

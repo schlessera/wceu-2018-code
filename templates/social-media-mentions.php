@@ -1,7 +1,11 @@
 <div class="wp-block-wceu2018-mentions">
-	<ol>
-		<?php foreach( $this->feed_entries as $entry ) { ?>
-			<li><?= $entry->get_content() ?></li>
-		<?php } ?>
-	</ol>
+	<?php foreach( $this->feed_entries as $entry ) { ?>
+		<div class="media">
+			<img src="<?= $entry->get_avatar_image_url() ?>" class="media--img">
+			<div class="media--bd">
+				<p class="media--header"><span class="author-name"><?= $entry->get_author_name() ?></span> <span class="author-slug"><?= $entry->get_author_slug() ?></span> <span class="time"><?= $this->date_formatter->format( $entry->get_posted_time() ) ?></span></p>
+				<p class="media--content"><?= $entry->get_content() ?></p>
+			</div>
+		</div>
+	<?php } ?>
 </div>

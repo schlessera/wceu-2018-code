@@ -14,11 +14,18 @@ interface FeedEntry {
 	public function get_content(): string;
 
 	/**
-	 * Get the author that posted the feed entry.
+	 * Get the name of the author that posted the feed entry.
 	 *
 	 * @return string Author name.
 	 */
-	public function get_author(): string;
+	public function get_author_name(): string;
+
+	/**
+	 * Get the slug of the author that posted the feed entry.
+	 *
+	 * @return string Author name.
+	 */
+	public function get_author_slug(): string;
 
 	/**
 	 * Get the time the feed entry was posted.
@@ -26,4 +33,11 @@ interface FeedEntry {
 	 * @return DateTimeInterface Date & time that the entry was posted.
 	 */
 	public function get_posted_time(): DateTimeInterface;
+
+	/**
+	 * Get the avatar image URL.
+	 *
+	 * @return string Avatar image URL.
+	 */
+	public function get_avatar_image_url(): string;
 }

@@ -4,5 +4,28 @@
  * Replace them with your own styles or remove the file completely.
  */
 
-.wp-block-wceu2018-mentions {
+.wp-block-wceu2018-mentions .media--header {
+	color: #888;
+	font-size: 80%;
+	margin-bottom: 0;
+}
+
+.wp-block-wceu2018-mentions .media--header .author-name,
+.wp-block-wceu2018-mentions .media--header .author-slug {
+	font-weight: bold;
+}
+
+.wp-block-wceu2018-mentions .media,
+.wp-block-wceu2018-mentions .media--bd {
+	overflow: hidden; _overflow: visible; zoom: 1;
+}
+
+.wp-block-wceu2018-mentions .media .media--img {
+	float: left;
+	margin-right: 10px;
+}
+
+.wp-block-wceu2018-mentions .media img.media--img {
+	display: block;
+	border-radius: 3px;
 }

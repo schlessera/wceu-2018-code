@@ -2,7 +2,6 @@
 
 namespace WordCampEurope\Workshop\SocialNetwork;
 
-use WordCampEurope\Workshop\Config;
 use WordCampEurope\Workshop\Exception\MissingConfigKey;
 
 final class FeedFactory {

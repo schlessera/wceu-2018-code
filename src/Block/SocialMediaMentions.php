@@ -5,6 +5,7 @@ namespace WordCampEurope\Workshop\Block;
 use WordCampEurope\Workshop\Asset;
 use WordCampEurope\Workshop\SocialNetwork\Feed;
 use WordCampEurope\Workshop\SocialNetwork\FeedFactory;
+use WordCampEurope\Workshop\SocialNetwork\FuzzyDateFormatter;
 use WordCampEurope\Workshop\View\ViewFactory;
 
 final class SocialMediaMentions extends GutenbergBlock {
@@ -114,7 +115,8 @@ final class SocialMediaMentions extends GutenbergBlock {
 		$feed    = $this->feed_factory->create( $network );
 
 		return [
-			'feed_entries' => $feed->get_entries( $user, $limit )
+			'feed_entries'   => $feed->get_entries( $user, $limit ),
+			'date_formatter' => new FuzzyDateFormatter(),
 		];
 	}
 

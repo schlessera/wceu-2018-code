@@ -45,7 +45,6 @@ abstract class GutenbergBlock implements Registerable, Renderable {
 	 * @return void
 	 */
 	public function register() {
-		$this->enqueue_fields_assets();
 		$this->register_assets();
 		$this->register_block();
 	}
@@ -66,37 +65,6 @@ abstract class GutenbergBlock implements Registerable, Renderable {
 		$context = array_merge( $context, $this->get_frontend_context() );
 
 		return $view->render( $context );
-	}
-
-	/**
-	 * Enqueue all required assets.
-	 */
-	protected function enqueue_fields_assets() {
-		array_map( [ $this, 'enqueue_asset' ], $this->get_fields_assets() );
-	}
-
-	/**
-	 * Get an array of Enqueueable assets for the fields middleware.
-	 *
-	 * @return array<Enqueueable>
-	 */
-	protected function get_fields_assets(): array {
-		return [
-			new Asset\Script(
-				'gutenberg-fields-middleware',
-				new Asset\Location\Minifiable(
-					new Asset\Location\Relative( 'assets/js/middleware.js' )
-				),
-				[ 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-date', 'wp-components' ]
-			),
-			new Asset\Style(
-				'gutenberg-fields-middleware',
-				new Asset\Location\Minifiable(
-					new Asset\Location\Relative( 'assets/css/middleware-editor.css' )
-				),
-				[]
-			),
-		];
 	}
 
 	/**

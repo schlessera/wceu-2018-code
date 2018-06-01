@@ -42,7 +42,7 @@ final class Client {
 		}
 
 		$result = json_decode( $response );
-		if ( isset( $result->errors ) && count( $result->errors > 0 ) ) {
+		if ( isset( $result->errors ) && count( $result->errors ) > 0 ) {
 			// The Twitter API produced an error, so just return an empty array
 			// instead.
 			return [];

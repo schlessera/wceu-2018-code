@@ -12,10 +12,6 @@ namespace WordCampEurope\Workshop;
  * Version:         1.0.0
  */
 
-use WordCampEurope\Workshop\SocialNetwork\Feed;
-use WordCampEurope\Workshop\SocialNetwork\FeedFactory;
-use WordCampEurope\Workshop\View\ViewFactory;
-
 // First we make sure the Autoloader that Composer provides is loaded.
 $autoloader = __DIR__ . '/vendor/autoload.php';
 if ( is_readable( $autoloader ) ) {
@@ -24,14 +20,16 @@ if ( is_readable( $autoloader ) ) {
 
 // Now we instantiate a feed factory that our Gutenberg will later be able to
 // use to instantiate feeds.
-$feed_factory = new FeedFactory( [
-	Feed::NETWORK_TWITTER => new Config\TwitterCredentials(
+$feed_factory = new SocialNetwork\FeedFactory( [
+	SocialNetwork\Feed::NETWORK_TWITTER => new Config\TwitterCredentials(
 		include __DIR__ . '/config/twitter-credentials.php'
 	),
 ] );
 
-// We also need a view factory for our Gutenberg block.
-$view_factory = new ViewFactory();
+// We also need a view factory for our Gutenberg block. We use a "templated" one
+// that allows for the view templates to be overridden through parent and child
+// themes.
+$view_factory = new View\TemplatedViewFactory();
 
 // Now we instantiate the Gutenberg block and inject its dependencies.
 $social_media_mentions = new Block\SocialMediaMentions(
@@ -40,7 +38,4 @@ $social_media_mentions = new Block\SocialMediaMentions(
 );
 
 // Finally, we hook up our Gutenberg to the WordPress lifecycle.
-add_action(
-	'init',
-	[ $social_media_mentions, 'register' ]
-);
+add_action( 'init', [ $social_media_mentions, 'register' ] );

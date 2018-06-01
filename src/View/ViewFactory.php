@@ -2,10 +2,9 @@
 
 namespace WordCampEurope\Workshop\View;
 
-use WordCampEurope\Workshop\Exception\InvalidEscapeContext;
 use WordCampEurope\Workshop\View;
 
-class ViewFactory {
+interface ViewFactory {
 
 	/**
 	 * Create a new view instance.
@@ -15,17 +14,5 @@ class ViewFactory {
 	 *
 	 * @return View View instance to use.
 	 */
-	public function create( string $uri, string $escape_context = '' ): View {
-		$view = new TemplatedView( $uri );
-
-		if ( empty( $escape_context ) ) {
-			return $view;
-		}
-
-		if ( ! class_exists( $escape_context ) ) {
-			throw InvalidEscapeContext::from_escape_context( $escape_context );
-		}
-
-		return new $escape_context( $view );
-	}
+	public function create( string $uri, string $escape_context = '' ): View;
 }

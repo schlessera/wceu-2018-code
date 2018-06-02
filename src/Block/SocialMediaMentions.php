@@ -98,7 +98,7 @@ final class SocialMediaMentions extends GutenbergBlock {
 			],
 			'mention' => [
 				'type'    => 'text',
-				'default' => '@schlessera',
+				'default' => '#WCEU',
 			],
 			'limit'   => [
 				'type'    => 'integer',

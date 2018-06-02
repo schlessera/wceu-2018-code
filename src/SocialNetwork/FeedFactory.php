@@ -33,6 +33,18 @@ final class FeedFactory {
 		if ( ! array_key_exists( $network, $this->configs ) ) {
 			throw MissingConfigKey::from_network( $network );
 		}
+
+		return new CachingFeed( $this->get_feed_for_network( $network ) );
+	}
+
+	/**
+	 * Get the feed for a specific network.
+	 *
+	 * @param string $network Network to get the feed for.
+	 *
+	 * @return Feed Feed object for the requested network.
+	 */
+	public function get_feed_for_network( string $network ) {
 		switch ( $network ) {
 			case Feed::NETWORK_FACEBOOK:
 				//return new Facebook\Feed();

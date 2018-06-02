@@ -62,7 +62,10 @@ abstract class GutenbergBlock implements Registerable, Renderable {
 			EscapeContext::POST
 		);
 
-		$context = array_merge( $context, $this->get_frontend_context() );
+		$context = array_merge(
+			$context,
+			$this->get_frontend_context( $context )
+		);
 
 		return $view->render( $context );
 	}
@@ -165,7 +168,9 @@ abstract class GutenbergBlock implements Registerable, Renderable {
 	/**
 	 * Get the contextual data with which to render the frontend.
 	 *
+	 * @param array $context Associative array of contextual data.
+	 *
 	 * @return array Associative array of contextual data.
 	 */
-	abstract protected function get_frontend_context(): array;
+	abstract protected function get_frontend_context( array $context ): array;
 }

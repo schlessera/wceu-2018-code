@@ -25,16 +25,16 @@ final class Feed implements FeedInterface {
 	/**
 	 * Get the feed entries for the social network.
 	 *
-	 * @param string $user  User to get the feed for.
-	 * @param int    $limit Optional. Limit the number of feed entries to this
-	 *                      number. Defaults to 5.
+	 * @param string $mention Mention to get the feed for.
+	 * @param int    $limit   Optional. Limit the number of feed entries to this
+	 *                        number. Defaults to 5.
 	 *
 	 * @return FeedEntry[] Array of FeedEntry objects.
 	 */
-	public function get_entries( string $user, int $limit = 5 ): array {
+	public function get_entries( string $mention, int $limit = 5 ): array {
 		$entries = [];
 
-		$feed_elements = $this->client->get_feed( $user, $limit );
+		$feed_elements = $this->client->get_feed( $mention, $limit );
 
 		foreach ( $feed_elements as $element ) {
 			$entries[] = new FeedEntry( $element );

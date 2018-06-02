@@ -91,7 +91,20 @@ final class SocialMediaMentions extends GutenbergBlock {
 	 * @return array Associative array of attributes.
 	 */
 	protected function get_attributes(): array {
-		return [];
+		return [
+			'network' => [
+				'type'    => 'text',
+				'default' => 'twitter',
+			],
+			'mention' => [
+				'type'    => 'text',
+				'default' => '@schlessera',
+			],
+			'limit'   => [
+				'type'    => 'integer',
+				'default' => 5,
+			],
+		];
 	}
 
 	/**
@@ -106,16 +119,18 @@ final class SocialMediaMentions extends GutenbergBlock {
 	/**
 	 * Get the contextual data with which to render the frontend.
 	 *
+	 * @param array $context Associative array of contextual data.
+	 *
 	 * @return array Associative array of contextual data.
 	 */
-	protected function get_frontend_context(): array {
-		$network = $this->get_network_name();
-		$user    = $this->get_user();
-		$limit   = $this->get_limit();
+	protected function get_frontend_context( array $context ): array {
+		$network = $this->get_network_name( $context );
+		$mention = $this->get_mention( $context );
+		$limit   = $this->get_limit( $context );
 		$feed    = $this->feed_factory->create( $network );
 
 		return [
-			'feed_entries'   => $feed->get_entries( $user, $limit ),
+			'feed_entries'   => $feed->get_entries( $mention, $limit ),
 			'date_formatter' => new FuzzyDateFormatter(),
 		];
 	}
@@ -123,17 +138,39 @@ final class SocialMediaMentions extends GutenbergBlock {
 	/**
 	 * Get the network name to use for instantiating the feed.
 	 *
+	 * @param array $context Associative array of contextual data.
+	 *
 	 * @return string Name of the social network to use.
 	 */
-	private function get_network_name(): string {
-		return Feed::NETWORK_TWITTER;
+	private function get_network_name( array $context ): string {
+		return isset( $context['network'] )
+			? (string) $context['network']
+			: $this->get_attributes()['network']['default'];
 	}
 
-	private function get_user(): string {
-		return 'schlessera';
+	/**
+	 * Get the mwntion that the feed should reflect.
+	 *
+	 * @param array $context Associative array of contextual data.
+	 *
+	 * @return string Mention to use for the feed.
+	 */
+	private function get_mention( array $context ): string {
+		return isset( $context['mention'] )
+			? (string) $context['mention']
+			: $this->get_attributes()['mention']['default'];
 	}
 
-	private function get_limit(): int {
-		return 10;
+	/**
+	 * Get the number of entries to display at the most.
+	 *
+	 * @param array $context Associative array of contextual data.
+	 *
+	 * @return int Number of entries to limit the feed to.
+	 */
+	private function get_limit( array $context ): int {
+		return isset( $context['limit'] )
+			? (int) $context['limit']
+			: $this->get_attributes()['limit']['default'];
 	}
 }

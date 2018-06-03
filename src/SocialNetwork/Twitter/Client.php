@@ -30,14 +30,18 @@ final class Client {
 	/**
 	 * Get a feed of mentions for a given Twitter user.
 	 *
-	 * @param string $user  User to search for mentions.
-	 * @param int    $limit Limit the result set to this number.
+	 * @param string $mention Mention to search for.
+	 * @param int    $limit   Limit the result set to this number.
 	 *
 	 * @return array Array of mentions for the given user.
 	 */
-	public function get_feed( string $user, int $limit ) {
-		$getfield = "?q={$user}&count={$limit}";
-		$twitter  = new TwitterAPIExchange( $this->credentials->get_client_settings() );
+	public function get_feed( string $mention, int $limit ) {
+		$search_string = rawurlencode( $mention );
+		$getfield      = "?q={$search_string}&count={$limit}";
+
+		$twitter = new TwitterAPIExchange(
+			$this->credentials->get_client_settings()
+		);
 
 		try {
 			$response = $twitter->setGetfield( $getfield )

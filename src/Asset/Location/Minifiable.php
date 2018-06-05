@@ -54,7 +54,7 @@ final class Minifiable implements Location {
 			return $location;
 		}
 
-		list( $dirname, $basename, $extension, $filename ) = pathinfo( $location );
+		list( $dirname, $basename, $extension, $filename ) = array_values( pathinfo( $location ) );
 
 		$minified_location = sprintf(
 			'%s/%s%s.%s',

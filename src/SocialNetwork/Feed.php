@@ -4,8 +4,9 @@ namespace WordCampEurope\Workshop\SocialNetwork;
 
 interface Feed {
 
-	const NETWORK_TWITTER  = 'twitter';
-	const NETWORK_FACEBOOK = 'facebook';
+	const NETWORK_TWITTER = 'twitter';
+
+	const NETWORK_WORDPRESS = 'wordpress';
 
 	/**
 	 * Get the feed entries for the social network.

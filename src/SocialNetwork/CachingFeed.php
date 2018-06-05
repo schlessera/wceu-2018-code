@@ -49,6 +49,7 @@ final class CachingFeed implements Feed {
 		}
 
 		$entries = $this->feed->get_entries( $mention, $limit );
+
 		set_transient( $key, $entries, 1 * MINUTE_IN_SECONDS );
 
 		return $entries;

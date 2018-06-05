@@ -46,8 +46,10 @@ final class FeedFactory {
 	 */
 	public function get_feed_for_network( string $network ) {
 		switch ( $network ) {
-			case Feed::NETWORK_FACEBOOK:
-				//return new Facebook\Feed();
+			case Feed::NETWORK_WORDPRESS:
+				return new WordPress\Feed(
+					new WordPress\Client()
+				);
 			case Feed::NETWORK_TWITTER:
 			default:
 				return new Twitter\Feed(

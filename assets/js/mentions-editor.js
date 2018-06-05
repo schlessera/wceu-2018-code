@@ -4,7 +4,8 @@
 	var __ = i18n.__;
 
 	var networkOptions = [
-		{ value: 'twitter', label: __( 'Twitter' ) }
+		{ value: 'twitter', label: __( 'Twitter' ) },
+		{ value: 'wordpress', label: __( 'WordPress' ) }
 	];
 
 	blocks.registerBlockType( 'wceu2018/mentions', {

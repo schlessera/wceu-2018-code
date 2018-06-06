@@ -4,6 +4,7 @@ namespace WordCampEurope\Workshop\SocialNetwork\Twitter;
 
 use DateTimeInterface;
 use DateTimeImmutable;
+use Exception;
 use WordCampEurope\Workshop\SocialNetwork\FeedEntry as FeedEntryInterface;
 
 final class FeedEntry implements FeedEntryInterface {
@@ -11,9 +12,20 @@ final class FeedEntry implements FeedEntryInterface {
 	const LINK_TAG         = '<a href="%s" class="%s">%s</a>';
 	const HASHTAG_URL      = 'https://twitter.com/hashtag/%s';
 	const USER_MENTION_URL = 'https://twitter.com/%s';
+	const DEFAULT_AVATAR   = 'https://abs.twimg.com/sticky/default_profile_images/default_profile_bigger.png';
 
+	/**
+	 * API response element that this feed represents.
+	 *
+	 * @var object
+	 */
 	private $element;
 
+	/**
+	 * Instantiate a FeedEntry object.
+	 *
+	 * @param object $element API response element that this feed represents.
+	 */
 	public function __construct( $element ) {
 		$this->element = $element;
 	}
@@ -64,7 +76,13 @@ final class FeedEntry implements FeedEntryInterface {
 	 * @return DateTimeInterface Date & time that the entry was posted.
 	 */
 	public function get_posted_time(): DateTimeInterface {
-		return new DateTimeImmutable( $this->element->created_at );
+		try {
+			$date = new DateTimeImmutable( $this->element->created_at );
+		} catch ( Exception $exception ) {
+			return new DateTimeImmutable();
+		}
+
+		return $date;
 	}
 
 	/**
@@ -73,6 +91,10 @@ final class FeedEntry implements FeedEntryInterface {
 	 * @return string Avatar image URL.
 	 */
 	public function get_avatar_image_url(): string {
+		if ( ! isset( $this->element->user->profile_image_url_https ) ) {
+			return self::DEFAULT_AVATAR;
+		}
+
 		return $this->element->user->profile_image_url_https;
 	}
 

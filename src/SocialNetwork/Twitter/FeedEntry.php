@@ -12,7 +12,7 @@ final class FeedEntry implements FeedEntryInterface {
 	const LINK_TAG         = '<a href="%s" class="%s">%s</a>';
 	const HASHTAG_URL      = 'https://twitter.com/hashtag/%s';
 	const USER_MENTION_URL = 'https://twitter.com/%s';
-	const DEFAULT_AVATAR   = 'https://abs.twimg.com/sticky/default_profile_images/default_profile_bigger.png';
+	const DEFAULT_AVATAR   = 'https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png';
 
 	/**
 	 * API response element that this feed represents.

@@ -47,7 +47,7 @@
 						el( components.SelectControl, {
 							label: __( 'Network to pull mentions from' ),
 							options: networkOptions,
-							select: props.attributes.network,
+							value: props.attributes.network,
 							onChange: function ( value ) {
 								props.setAttributes(
 									{ network: value }

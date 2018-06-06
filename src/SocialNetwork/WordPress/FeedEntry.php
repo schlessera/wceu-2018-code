@@ -9,20 +9,31 @@ use WordCampEurope\Workshop\SocialNetwork\FeedEntry as FeedEntryInterface;
 
 final class FeedEntry implements FeedEntryInterface {
 
-	const LINK_TAG = '<a href="%s" class="%s">%s</a>';
-
+	const LINK_TAG  = '<a href="%s" class="%s">%s</a>';
 	const TITLE_TAG = '<h3>%s</h3>';
 
+	/**
+	 * API response element that this feed represents.
+	 *
+	 * @var object
+	 */
 	private $element;
 
+	/**
+	 * Instantiate a FeedEntry object.
+	 *
+	 * @param object $element API response element that this feed represents.
+	 */
 	public function __construct( $element ) {
 		$this->element = $element;
 	}
 
 	/**
-	 * @param string $key
+	 * Get a given field from the author data.
 	 *
-	 * @return string
+	 * @param string $key Key to retrieve from the author data.
+	 *
+	 * @return string Value found under the requested key.
 	 */
 	protected function get_author_field( string $key ): string {
 		if ( ! isset( $this->element->author ) ) {
@@ -105,5 +116,4 @@ final class FeedEntry implements FeedEntryInterface {
 	public function get_avatar_image_url(): string {
 		return $this->get_author_field( 'avatar_URL' );
 	}
-
 }

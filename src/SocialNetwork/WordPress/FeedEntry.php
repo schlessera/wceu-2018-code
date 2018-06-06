@@ -10,7 +10,7 @@ use WordCampEurope\Workshop\SocialNetwork\FeedEntry as FeedEntryInterface;
 final class FeedEntry implements FeedEntryInterface {
 
 	const LINK_TAG  = '<a href="%s" class="%s">%s</a>';
-	const TITLE_TAG = '<h3>%s</h3>';
+	const TITLE_TAG = '<h3 class="%s">%s</h3>';
 
 	/**
 	 * API response element that this feed represents.
@@ -43,6 +43,7 @@ final class FeedEntry implements FeedEntryInterface {
 
 		$title = sprintf(
 			self::TITLE_TAG,
+			'title title--wordpress',
 			$url
 		);
 

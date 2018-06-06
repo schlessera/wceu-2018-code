@@ -4,6 +4,7 @@ namespace WordCampEurope\Workshop\SocialNetwork\WordPress;
 
 use DateTimeInterface;
 use DateTimeImmutable;
+use Exception;
 use WordCampEurope\Workshop\SocialNetwork\FeedEntry as FeedEntryInterface;
 
 final class FeedEntry implements FeedEntryInterface {
@@ -87,7 +88,13 @@ final class FeedEntry implements FeedEntryInterface {
 	 * @return DateTimeInterface Date & time that the entry was posted.
 	 */
 	public function get_posted_time(): DateTimeInterface {
-		return new DateTimeImmutable( $this->element->date );
+		try {
+			$date = new DateTimeImmutable( $this->element->date );
+		} catch ( Exception $exception ) {
+			return new DateTimeImmutable();
+		}
+
+		return $date;
 	}
 
 	/**

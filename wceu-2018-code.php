@@ -19,8 +19,8 @@ if ( is_readable( $autoloader ) ) {
 	include_once $autoloader;
 }
 
-// Now we instantiate a feed factory that our Gutenberg will later be able to
-// use to instantiate feeds.
+// Now we instantiate a feed factory that our Gutenberg block will later be able
+// to use to instantiate feeds.
 $feed_factory = new SocialNetwork\FeedFactory( [
 	SocialNetwork\Feed::NETWORK_WORDPRESS => new Config\NullConfig(),
 	SocialNetwork\Feed::NETWORK_TWITTER   => new Config\TwitterCredentials(

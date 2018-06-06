@@ -31,11 +31,11 @@ final class WordPressComCredentials extends BaseConfig {
 	}
 
 	/**
-	 * Get an array of settings as it is required by the Twitter client.
+	 * Get an array of keys as it is required by the WordPress.com client.
 	 *
 	 * @return array<string>
 	 */
-	public function get_client_settings(): array {
+	public function get_keys(): array {
 		return [
 			self::CLIENT_ID     => $this->offsetGet( self::CLIENT_ID ),
 			self::CLIENT_SECRET => $this->offsetGet( self::CLIENT_SECRET ),

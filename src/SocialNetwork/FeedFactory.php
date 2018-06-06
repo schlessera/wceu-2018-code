@@ -48,7 +48,7 @@ final class FeedFactory {
 		switch ( $network ) {
 			case Feed::NETWORK_WORDPRESS:
 				return new WordPress\Feed(
-					new WordPress\Client()
+					new WordPress\Client( $this->configs[ $network ] )
 				);
 			case Feed::NETWORK_TWITTER:
 			default:

@@ -40,6 +40,10 @@ final class Client {
 
 		$result = json_decode( wp_remote_retrieve_body( $response ) );
 
+		if ( ! isset( $result->posts ) ) {
+			return [];
+		}
+
 		return $result->posts;
 	}
 }

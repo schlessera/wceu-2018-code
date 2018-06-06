@@ -36,4 +36,6 @@
 .wp-block-wceu2018-mentions .media img.media--img {
 	display: block;
 	border-radius: 3px;
+	width: 48px;
+	height: 48px;
 }

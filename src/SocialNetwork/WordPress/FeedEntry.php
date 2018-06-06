@@ -29,27 +29,6 @@ final class FeedEntry implements FeedEntryInterface {
 	}
 
 	/**
-	 * Get a given field from the author data.
-	 *
-	 * @param string $key Key to retrieve from the author data.
-	 *
-	 * @return string Value found under the requested key.
-	 */
-	protected function get_author_field( string $key ): string {
-		if ( ! isset( $this->element->author ) ) {
-			return '';
-		}
-
-		$author = $this->element->author;
-
-		if ( ! isset( $author->$key ) ) {
-			return '';
-		}
-
-		return $author->$key;
-	}
-
-	/**
 	 * Get the content of the feed entry.
 	 *
 	 * @return string Content of the feed entry.
@@ -115,5 +94,27 @@ final class FeedEntry implements FeedEntryInterface {
 	 */
 	public function get_avatar_image_url(): string {
 		return $this->get_author_field( 'avatar_URL' );
+	}
+
+
+	/**
+	 * Get a given field from the author data.
+	 *
+	 * @param string $key Key to retrieve from the author data.
+	 *
+	 * @return string Value found under the requested key.
+	 */
+	private function get_author_field( string $key ): string {
+		if ( ! isset( $this->element->author ) ) {
+			return '';
+		}
+
+		$author = $this->element->author;
+
+		if ( ! isset( $author->$key ) ) {
+			return '';
+		}
+
+		return $author->$key;
 	}
 }

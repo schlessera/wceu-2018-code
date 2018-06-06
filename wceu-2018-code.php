@@ -22,7 +22,9 @@ if ( is_readable( $autoloader ) ) {
 // Now we instantiate a feed factory that our Gutenberg block will later be able
 // to use to instantiate feeds.
 $feed_factory = new SocialNetwork\FeedFactory( [
-	SocialNetwork\Feed::NETWORK_WORDPRESS => new Config\NullConfig(),
+	SocialNetwork\Feed::NETWORK_WORDPRESS => new Config\WordPressComCredentials(
+		include __DIR__ . '/config/wordpress-com-credentials.php'
+	),
 	SocialNetwork\Feed::NETWORK_TWITTER   => new Config\TwitterCredentials(
 		include __DIR__ . '/config/twitter-credentials.php'
 	),

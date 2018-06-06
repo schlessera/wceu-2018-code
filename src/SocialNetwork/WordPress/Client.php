@@ -34,13 +34,15 @@ final class Client {
 		$code     = wp_remote_retrieve_response_code( $response );
 
 		if ( (int) $code !== 200 ) {
-			// The WordPress.com API produced an error, so just return an empty array instead
+			// The WordPress.com API produced an error, so just return an empty
+			// array instead
 			return [];
 		}
 
 		$result = json_decode( wp_remote_retrieve_body( $response ) );
 
 		if ( ! isset( $result->posts ) ) {
+			// Result didn't contain posts, so just return an empty array.
 			return [];
 		}
 

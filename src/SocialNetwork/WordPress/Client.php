@@ -4,7 +4,7 @@ namespace WordCampEurope\Workshop\SocialNetwork\WordPress;
 
 final class Client {
 
-	const URL = 'https://public-api.wordpress.com/rest/v1.2';
+	const URL = 'https://public-api.wordpress.com/rest/v1.2/read/search';
 
 	/**
 	 * Search the WordPress.com posts for a mention
@@ -15,19 +15,15 @@ final class Client {
 	 * @return array Array of mentions for the given user.
 	 */
 	public function get_feed( string $mention, int $limit ) {
-		$endpoint   = '/read/search';
-		$parameters = [
-			'q'      => $mention,
-			'number' => $limit,
-		];
-		$headers    = [ 'Content-Type' => 'application/json' ];
+		$search_string = urlencode( $mention );
+		$url_arguments = "?q={$search_string}&number={$limit}";
 
-		$url = self::URL . $endpoint . '?' . http_build_query( $parameters );
+		$url = self::URL . $url_arguments;
 
 		$args = [
 			'timeout'     => 2,
 			'httpversion' => '1.1',
-			'headers'     => $headers,
+			'headers'     => [ 'Content-Type' => 'application/json' ],
 		];
 
 		$response = wp_remote_get( $url, $args );

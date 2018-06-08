@@ -19,6 +19,19 @@ abstract class BaseConfig extends ArrayObject {
 	}
 
 	/**
+	 * Create a new Config instance based on a relative filename.
+	 *
+	 * @param string $filename Relative filename of the config file.
+	 *
+	 * @return BaseConfig
+	 */
+	public static function create_from_file( string $filename ) {
+		$root = dirname( __DIR__, 2 ) . '/config';
+
+		return new static( include "{$root}/{$filename}" );
+	}
+
+	/**
 	 * Asserts that the current configuration data is valid.
 	 */
 	abstract protected function validate_config();

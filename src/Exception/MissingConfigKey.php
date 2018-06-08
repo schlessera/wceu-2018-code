@@ -42,4 +42,80 @@ class MissingConfigKey extends DomainException {
 
 		return new static( $message );
 	}
+
+	/**
+	 * Create a new instance of the exception for a missing or invalid network
+	 * implementation.
+	 *
+	 * @param string $name Name of the social network.
+	 *
+	 * @return static
+	 */
+	public static function from_social_network_implementation(
+		string $name
+	): MissingConfigKey {
+		$message = sprintf(
+			'The configuration for the social network "%s" is missing a valid implementation class.',
+			$name
+		);
+
+		return new static( $message );
+	}
+
+	/**
+	 * Create a new instance of the exception for a missing or invalid network
+	 * label.
+	 *
+	 * @param string $name Name of the social network.
+	 *
+	 * @return static
+	 */
+	public static function from_social_network_label(
+		string $name
+	): MissingConfigKey {
+		$message = sprintf(
+			'The configuration for the social network "%s" is missing a label.',
+			$name
+		);
+
+		return new static( $message );
+	}
+
+	/**
+	 * Create a new instance of the exception for a missing or invalid order
+	 * strategy implementation.
+	 *
+	 * @param string $name Name of the order strategy.
+	 *
+	 * @return static
+	 */
+	public static function from_order_strategy_implementation(
+		string $name
+	): MissingConfigKey {
+		$message = sprintf(
+			'The configuration for the order strategy "%s" is missing a valid implementation class.',
+			$name
+		);
+
+		return new static( $message );
+	}
+
+	/**
+	 * Create a new instance of the exception for a missing or invalid order
+	 * strategy label.
+	 *
+	 * @param string $name Name of the order strategy.
+	 *
+	 * @return static
+	 */
+	public static function from_order_strategy_label(
+		string $name
+	): MissingConfigKey {
+		$message = sprintf(
+			'The configuration for the order strategy "%s" is missing a label.',
+			$name
+		);
+
+		return new static( $message );
+	}
 }

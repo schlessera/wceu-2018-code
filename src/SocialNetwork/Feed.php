@@ -11,11 +11,9 @@ interface Feed {
 	/**
 	 * Get the feed entries for the social network.
 	 *
-	 * @param string $mention Mention to get the feed for.
-	 * @param int    $limit   Optional. Limit the number of feed entries to this
-	 *                        number. Defaults to 5.
+	 * @param Attributes $attributes Attributes to get the feed entry for.
 	 *
 	 * @return FeedEntry[] Array of FeedEntry objects.
 	 */
-	public function get_entries( string $mention, int $limit = 5 ): array;
+	public function get_entries( Attributes $attributes ): array;
 }

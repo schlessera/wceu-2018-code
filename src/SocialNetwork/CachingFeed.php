@@ -7,7 +7,7 @@ final class CachingFeed implements Feed {
 	/**
 	 * Format of the cache key.
 	 */
-	const KEY_FORMAT = 'wceu2018/mentions/%s/%s/%s';
+	const KEY_FORMAT = 'wceu2018/mentions/%s';
 
 	/**
 	 * Feed to cache.
@@ -28,18 +28,14 @@ final class CachingFeed implements Feed {
 	/**
 	 * Get the feed entries for the social network.
 	 *
-	 * @param string $mention Mention to get the feed for.
-	 * @param int    $limit   Optional. Limit the number of feed entries to this
-	 *                        number. Defaults to 5.
+	 * @param Attributes $attributes Attributes to get the feed entry for.
 	 *
 	 * @return FeedEntry[] Array of FeedEntry objects.
 	 */
-	public function get_entries( string $mention, int $limit = 5 ): array {
+	public function get_entries( Attributes $attributes ): array {
 		$key = sprintf(
 			self::KEY_FORMAT,
-			md5( get_class( $this->feed ) ),
-			md5( $mention ),
-			$limit
+			md5( json_encode( $attributes->all() ) )
 		);
 
 		$entries = get_transient( $key );
@@ -48,7 +44,7 @@ final class CachingFeed implements Feed {
 			return $entries;
 		}
 
-		$entries = $this->feed->get_entries( $mention, $limit );
+		$entries = $this->feed->get_entries( $attributes );
 
 		set_transient( $key, $entries, 1 * MINUTE_IN_SECONDS );
 

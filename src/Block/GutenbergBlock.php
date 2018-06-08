@@ -112,9 +112,12 @@ abstract class GutenbergBlock implements Registerable, Renderable {
 			}
 
 			$args[ $type ] = $this->assets[ $type ]->get_handle();
+			unset( $this->assets[ $type ] );
 		}
 
 		register_block_type( $this->get_block_name(), $args );
+
+		array_map( [ $this, 'enqueue_asset' ], $this->assets );
 	}
 
 	/**

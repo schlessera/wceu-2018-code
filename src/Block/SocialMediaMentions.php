@@ -3,7 +3,9 @@
 namespace WordCampEurope\Workshop\Block;
 
 use WordCampEurope\Workshop\Asset;
-use WordCampEurope\Workshop\SocialNetwork\Feed;
+use WordCampEurope\Workshop\Config\OrderStrategies;
+use WordCampEurope\Workshop\Config\SocialNetworks;
+use WordCampEurope\Workshop\SocialNetwork\Attributes;
 use WordCampEurope\Workshop\SocialNetwork\FeedFactory;
 use WordCampEurope\Workshop\SocialNetwork\FuzzyDateFormatter;
 use WordCampEurope\Workshop\View\ViewFactory;
@@ -16,6 +18,9 @@ final class SocialMediaMentions extends GutenbergBlock {
 	const BLOCK_EDITOR_CSS = 'mentions-block-editor';
 	const BLOCK_CSS        = 'mentions-block';
 
+	const SOCIAL_NETWORKS_INLINE_SCRIPT = 'wceu2018_social_media_mentions_network_labels';
+	const ORDER_STRATEGY_INLINE_SCRIPT  = 'wceu2018_social_media_mentions_order_strategy_labels';
+
 	const FRONTEND_VIEW = 'templates/social-media-mentions';
 
 	/**
@@ -26,16 +31,36 @@ final class SocialMediaMentions extends GutenbergBlock {
 	private $feed_factory;
 
 	/**
+	 * Available social networks.
+	 *
+	 * @var SocialNetworks
+	 */
+	private $networks;
+
+	/**
+	 * Available order strategies.
+	 *
+	 * @var OrderStrategies
+	 */
+	private $order_strategies;
+
+	/**
 	 * Instantiate a SocialMediaMentions object.
 	 *
-	 * @param FeedFactory $feed_factory Feed factory to use.
-	 * @param ViewFactory $view_factory View factory to use.
+	 * @param FeedFactory     $feed_factory     Feed factory to use.
+	 * @param ViewFactory     $view_factory     View factory to use.
+	 * @param SocialNetworks  $networks         Available social networks.
+	 * @param OrderStrategies $order_strategies Available order strategies.
 	 */
 	public function __construct(
 		FeedFactory $feed_factory,
-		ViewFactory $view_factory
+		ViewFactory $view_factory,
+		SocialNetworks $networks,
+		OrderStrategies $order_strategies
 	) {
-		$this->feed_factory = $feed_factory;
+		$this->feed_factory     = $feed_factory;
+		$this->networks         = $networks;
+		$this->order_strategies = $order_strategies;
 		parent::__construct( $view_factory );
 	}
 
@@ -73,6 +98,16 @@ final class SocialMediaMentions extends GutenbergBlock {
 				),
 				[ 'wp-editor' ]
 			),
+			new Asset\InlineScript(
+				self::BLOCK_EDITOR_JS,
+				$this->get_social_network_labels_script(),
+				'before'
+			),
+			new Asset\InlineScript(
+				self::BLOCK_EDITOR_JS,
+				$this->get_order_strategy_labels_script(),
+				'before'
+			),
 		];
 	}
 
@@ -91,20 +126,7 @@ final class SocialMediaMentions extends GutenbergBlock {
 	 * @return array Associative array of attributes.
 	 */
 	protected function get_attributes(): array {
-		return [
-			'network' => [
-				'type'    => 'text',
-				'default' => 'twitter',
-			],
-			'mention' => [
-				'type'    => 'text',
-				'default' => '#WCEU',
-			],
-			'limit'   => [
-				'type'    => 'integer',
-				'default' => 5,
-			],
-		];
+		return Attributes::SCHEMA;
 	}
 
 	/**
@@ -124,53 +146,55 @@ final class SocialMediaMentions extends GutenbergBlock {
 	 * @return array Associative array of contextual data.
 	 */
 	protected function get_frontend_context( array $context ): array {
-		$network = $this->get_network_name( $context );
-		$mention = $this->get_mention( $context );
-		$limit   = $this->get_limit( $context );
-		$feed    = $this->feed_factory->create( $network );
+		$attributes = Attributes::from_context( $context );
+
+		$feed = $this->feed_factory->create( $attributes );
 
 		return [
-			'feed_entries'   => $feed->get_entries( $mention, $limit ),
+			'feed_entries'   => $feed->get_entries( $attributes ),
 			'date_formatter' => new FuzzyDateFormatter(),
 		];
 	}
 
 	/**
-	 * Get the network name to use for instantiating the feed.
+	 * Get the network label data as a JavaScript script to inline.
 	 *
-	 * @param array $context Associative array of contextual data.
-	 *
-	 * @return string Name of the social network to use.
+	 * @return string JavaScript script to inline.
 	 */
-	private function get_network_name( array $context ): string {
-		return isset( $context['network'] )
-			? (string) $context['network']
-			: $this->get_attributes()['network']['default'];
+	protected function get_social_network_labels_script(): string {
+		$labels = [];
+		foreach ( $this->networks as $network => $attributes ) {
+			$labels[] = [
+				'value' => $network,
+				'label' => $attributes['label'],
+			];
+		}
+
+		return sprintf(
+			'var %s = %s;',
+			self::SOCIAL_NETWORKS_INLINE_SCRIPT,
+			json_encode( $labels )
+		);
 	}
 
 	/**
-	 * Get the mwntion that the feed should reflect.
+	 * Get the order strategy label data as a JavaScript script to inline.
 	 *
-	 * @param array $context Associative array of contextual data.
-	 *
-	 * @return string Mention to use for the feed.
+	 * @return string JavaScript script to inline.
 	 */
-	private function get_mention( array $context ): string {
-		return isset( $context['mention'] )
-			? (string) $context['mention']
-			: $this->get_attributes()['mention']['default'];
-	}
+	protected function get_order_strategy_labels_script(): string {
+		$labels = [];
+		foreach ( $this->order_strategies as $strategy => $attributes ) {
+			$labels[] = [
+				'value' => $strategy,
+				'label' => $attributes['label'],
+			];
+		}
 
-	/**
-	 * Get the number of entries to display at the most.
-	 *
-	 * @param array $context Associative array of contextual data.
-	 *
-	 * @return int Number of entries to limit the feed to.
-	 */
-	private function get_limit( array $context ): int {
-		return isset( $context['limit'] )
-			? (int) $context['limit']
-			: $this->get_attributes()['limit']['default'];
+		return sprintf(
+			'var %s = %s;',
+			self::ORDER_STRATEGY_INLINE_SCRIPT,
+			json_encode( $labels )
+		);
 	}
 }

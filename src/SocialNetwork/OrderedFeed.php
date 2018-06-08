@@ -12,27 +12,49 @@ final class OrderedFeed implements Feed {
 	private $feed;
 
 	/**
+	 * Order strategy to use.
+	 *
+	 * @var OrderStrategy
+	 */
+	private $strategy;
+
+	/**
 	 * Instantiate a OrderedFeed object.
 	 *
-	 * @param Feed $feed Feed to cache.
+	 * @param Feed          $feed     Feed to cache.
+	 * @param OrderStrategy $strategy Order strategy to use.
 	 */
-	public function __construct( Feed $feed ) {
-		$this->feed = $feed;
+	public function __construct( Feed $feed, OrderStrategy $strategy ) {
+		$this->feed     = $feed;
+		$this->strategy = $strategy;
 	}
 
 	/**
 	 * Get the feed entries for the social network.
 	 *
-	 * @param string $mention Mention to get the feed for.
-	 * @param int    $limit   Optional. Limit the number of feed entries to this
-	 *                        number. Defaults to 5.
+	 * @param Attributes $attributes Attributes to get the feed entry for.
 	 *
 	 * @return FeedEntry[] Array of FeedEntry objects.
 	 */
-	public function get_entries( string $mention, int $limit = 5 ): array {
-		$entries = $this->feed->get_entries( $mention, $limit );
+	public function get_entries( Attributes $attributes ): array {
+		$entries = $this->feed->get_entries( $attributes );
 
-		// TODO: Sort entries using a Strategy.
+		return $this->order_entries( $entries );
+	}
+
+	/**
+	 * Order the entries using the provided order strategy.
+	 *
+	 * @param array $entries Entries to sort.
+	 *
+	 * @return array Sorted entries.
+	 */
+	public function order_entries( array $entries ): array {
+		if ( empty( $entries ) ) {
+			return [];
+		}
+
+		usort( $entries, [ $this->strategy, 'compare' ] );
 
 		return $entries;
 	}

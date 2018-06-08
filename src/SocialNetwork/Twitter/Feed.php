@@ -2,6 +2,7 @@
 
 namespace WordCampEurope\Workshop\SocialNetwork\Twitter;
 
+use WordCampEurope\Workshop\SocialNetwork\Attributes;
 use WordCampEurope\Workshop\SocialNetwork\Feed as FeedInterface;
 
 final class Feed implements FeedInterface {
@@ -25,16 +26,17 @@ final class Feed implements FeedInterface {
 	/**
 	 * Get the feed entries for the social network.
 	 *
-	 * @param string $mention Mention to get the feed for.
-	 * @param int    $limit   Optional. Limit the number of feed entries to this
-	 *                        number. Defaults to 5.
+	 * @param Attributes $attributes Attributes to get the feed entry for.
 	 *
 	 * @return FeedEntry[] Array of FeedEntry objects.
 	 */
-	public function get_entries( string $mention, int $limit = 5 ): array {
+	public function get_entries( Attributes $attributes ): array {
 		$entries = [];
 
-		$feed_elements = $this->client->get_feed( $mention, $limit );
+		$feed_elements = $this->client->get_feed(
+			$attributes->mention(),
+			$attributes->limit()
+		);
 
 		foreach ( $feed_elements as $element ) {
 			$entries[] = new FeedEntry( $element );

@@ -13,6 +13,10 @@ use WordCampEurope\Workshop\View\ViewFactory;
  *
  * It manages the asset handling and provides and the rendering callback that is
  * mapped to an external templated view.
+ *
+ * Pattern: Template Method
+ *
+ * @see http://designpatternsphp.readthedocs.io/en/latest/Behavioral/TemplateMethod/README.html
  */
 abstract class GutenbergBlock implements Registerable, Renderable {
 

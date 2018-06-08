@@ -16,7 +16,7 @@ abstract class BaseConfig extends ArrayObject {
 	/**
 	 * Instantiate a BaseConfig object.
 	 *
-	 * @param array $config
+	 * @param array $config Associative array if configuration data.
 	 */
 	public function __construct( $config = array() ) {
 		// Make sure the config entries can be accessed as properties.

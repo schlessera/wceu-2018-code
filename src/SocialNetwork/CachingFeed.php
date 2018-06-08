@@ -2,6 +2,8 @@
 
 namespace WordCampEurope\Workshop\SocialNetwork;
 
+use WordCampEurope\Workshop\CachingEngine;
+
 /**
  * Turns an implementation of the Feed interface that represents a collection
  * of feed entries into a cached collection of feed entries that only get
@@ -26,12 +28,20 @@ final class CachingFeed implements Feed {
 	private $feed;
 
 	/**
+	 * Caching engine to use.
+	 *
+	 * @var CachingEngine
+	 */
+	private $cache;
+
+	/**
 	 * Instantiate a CachingFeed object.
 	 *
 	 * @param Feed $feed Feed to cache.
 	 */
-	public function __construct( Feed $feed ) {
-		$this->feed = $feed;
+	public function __construct( Feed $feed, CachingEngine $cache ) {
+		$this->feed  = $feed;
+		$this->cache = $cache;
 	}
 
 	/**
@@ -47,16 +57,12 @@ final class CachingFeed implements Feed {
 			md5( json_encode( $attributes->all() ) )
 		);
 
-		$entries = get_transient( $key );
-
-		if ( false !== $entries ) {
-			return $entries;
-		}
-
-		$entries = $this->feed->get_entries( $attributes );
-
-		set_transient( $key, $entries, 1 * MINUTE_IN_SECONDS );
-
-		return $entries;
+		return $this->cache->remember(
+			$key,
+			function () use ( $attributes ) {
+				return $this->feed->get_entries( $attributes );
+			},
+			5 * MINUTE_IN_SECONDS
+		);
 	}
 }

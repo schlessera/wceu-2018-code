@@ -32,11 +32,17 @@ $sorting_strategy_factory = new SocialNetwork\SortingStrategyFactory(
 	$sorting_strategies
 );
 
+// We use the transient caching engine by default here. The object cache makes
+// sense on high traffic sites with a persistent object cache, while the
+// volatile cache is useful for testing.
+$caching_engine = new CachingEngine\TransientCache;
+
 // Now we instantiate a feed factory that our Gutenberg block will later be able
 // to use to instantiate feeds.
 $feed_factory = new SocialNetwork\FeedFactory(
 	$networks,
-	$sorting_strategy_factory
+	$sorting_strategy_factory,
+	$caching_engine
 );
 
 // We also need a view factory for our Gutenberg block. We use a "templated" one

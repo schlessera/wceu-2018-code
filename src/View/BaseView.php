@@ -5,6 +5,7 @@ namespace WordCampEurope\Workshop\View;
 use WordCampEurope\Workshop\Exception\FailedToLoadView;
 use WordCampEurope\Workshop\Exception\InvalidURI;
 use WordCampEurope\Workshop\View;
+use Exception;
 
 /**
  * Base implementation of the View interface.
@@ -72,7 +73,7 @@ class BaseView implements View {
 
 		try {
 			include $this->uri;
-		} catch ( \Exception $exception ) {
+		} catch ( Exception $exception ) {
 			// Remove whatever levels were added up until now.
 			while ( ob_get_level() > $buffer_level ) {
 				ob_end_clean();

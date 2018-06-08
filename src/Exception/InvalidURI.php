@@ -4,6 +4,11 @@ namespace WordCampEurope\Workshop\Exception;
 
 use InvalidArgumentException;
 
+/**
+ * Exception class that is thrown when an invalid View URI was provided.
+ *
+ * This exceptions extends the SPL InvalidArgumentException.
+ */
 class InvalidURI extends InvalidArgumentException {
 
 	/**

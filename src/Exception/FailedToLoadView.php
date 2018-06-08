@@ -5,6 +5,11 @@ namespace WordCampEurope\Workshop\Exception;
 use Exception;
 use RuntimeException;
 
+/**
+ * Exception class that is thrown when a view file failed to load properly.
+ *
+ * This exceptions extends the SPL RuntimeException.
+ */
 class FailedToLoadView extends RuntimeException {
 
 	/**

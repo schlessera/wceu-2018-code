@@ -4,7 +4,12 @@ namespace WordCampEurope\Workshop\Exception;
 
 use DomainException;
 
-class MissingOrderStrategy extends DomainException {
+/**
+ * Exception class that is thrown when a requested sorting strategy is missing.
+ *
+ * This exceptions extends the SPL DomainException.
+ */
+class MissingSortingStrategy extends DomainException {
 
 	/**
 	 * Create a new instance of the exception for a missing strategy.
@@ -15,7 +20,7 @@ class MissingOrderStrategy extends DomainException {
 	 */
 	public static function from_strategy( string $strategy ): MissingConfigKey {
 		$message = sprintf(
-			'The order strategy "%s" is missing from the set of known strategies.',
+			'The sorting strategy "%s" is missing from the set of known strategies.',
 			$strategy
 		);
 

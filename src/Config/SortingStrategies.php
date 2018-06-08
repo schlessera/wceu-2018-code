@@ -4,7 +4,11 @@ namespace WordCampEurope\Workshop\Config;
 
 use WordCampEurope\Workshop\Exception\MissingConfigKey;
 
-final class OrderStrategies extends BaseConfig {
+/**
+ * Configuration object that provides the list of available sorting strategy
+ * implementations and their configuration details.
+ */
+final class SortingStrategies extends BaseConfig {
 
 	/**
 	 * Asserts that the current configuration data is valid.
@@ -13,7 +17,7 @@ final class OrderStrategies extends BaseConfig {
 		foreach ( $this->getArrayCopy() as $name => $attributes ) {
 			if ( ! array_key_exists( 'implementation', $attributes )
 			     || ! class_exists( $attributes['implementation'] ) ) {
-				throw MissingConfigKey::from_order_strategy_implementation(
+				throw MissingConfigKey::from_sorting_strategy_implementation(
 					$name
 				);
 			}

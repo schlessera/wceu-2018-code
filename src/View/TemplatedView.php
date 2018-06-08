@@ -4,6 +4,14 @@ namespace WordCampEurope\Workshop\View;
 
 use WordCampEurope\Workshop\Exception\InvalidURI;
 
+/**
+ * Extension of the BaseView to make it "templated" in the WordPress sense of
+ * the word.
+ *
+ * This means that it has a cascade of locations (child theme folder, parent
+ * theme folder, plugin folder) that are scanned to find the view template to
+ * be used for rendering.
+ */
 final class TemplatedView extends BaseView {
 
 	/**

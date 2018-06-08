@@ -2,6 +2,9 @@
 
 namespace WordCampEurope\Workshop\Asset;
 
+/**
+ * Asset implementation that represents a WordPress inline JavaScript snippet.
+ */
 final class InlineScript implements Enqueueable {
 
 	/**

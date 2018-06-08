@@ -2,6 +2,9 @@
 
 namespace WordCampEurope\Workshop\Asset;
 
+/**
+ * Asset implementation that represents a WordPress JavaScript asset.
+ */
 final class Script implements Enqueueable {
 
 	/**

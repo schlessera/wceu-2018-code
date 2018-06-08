@@ -4,6 +4,10 @@ namespace WordCampEurope\Workshop\Config;
 
 use WordCampEurope\Workshop\Exception\MissingConfigKey;
 
+/**
+ * Configuration object that provides the credentials for the Twitter Remote
+ * API Client implementation.
+ */
 final class TwitterCredentials extends BaseConfig {
 
 	const OAUTH_ACCESS_TOKEN        = 'oauth_access_token';

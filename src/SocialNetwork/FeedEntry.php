@@ -4,6 +4,12 @@ namespace WordCampEurope\Workshop\SocialNetwork;
 
 use DateTimeInterface;
 
+/**
+ * A single entry of a social media mentions feed.
+ *
+ * This is the common minimum set of data we want every supported social
+ * network to provide.
+ */
 interface FeedEntry {
 
 	/**

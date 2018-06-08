@@ -4,6 +4,15 @@ namespace WordCampEurope\Workshop\View;
 
 use WordCampEurope\Workshop\View;
 
+/**
+ * Decorator that escapes the rendering output of a given view for a WordPress
+ * Post context. This means that the content will be passed through the
+ * wp_kses_post() method.
+ *
+ * Pattern: Decorator
+ *
+ * @see http://designpatternsphp.readthedocs.io/en/latest/Structural/Decorator/README.html
+ */
 final class PostEscapedView implements View {
 
 	/**

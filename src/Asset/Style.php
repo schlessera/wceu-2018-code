@@ -2,6 +2,9 @@
 
 namespace WordCampEurope\Workshop\Asset;
 
+/**
+ * Asset implementation that represents a WordPress CSS asset.
+ */
 final class Style implements Enqueueable {
 
 	/**

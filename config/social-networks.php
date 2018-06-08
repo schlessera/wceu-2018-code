@@ -4,6 +4,14 @@ namespace WordCampEurope\Workshop\Config;
 
 use WordCampEurope\Workshop\SocialNetwork;
 
+/*
+ * Configuration data that represents the collection of available social network
+ * implementations.
+ *
+ * This is the only existing file that needs to be modified when a new social
+ * network is to be added.
+ */
+
 return [
 	'twitter'   => [
 		'label'          => __( 'Twitter' ),

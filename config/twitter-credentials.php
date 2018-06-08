@@ -2,6 +2,13 @@
 
 namespace WordCampEurope\Workshop\Config;
 
+/*
+ * Configuration data that regroups the Twitter authentication credentials.
+ *
+ * The credentials can not only be encoded as default values in this file (which
+ * is NOT recommended), but can also be provided through environment variables.
+ */
+
 return [
 	TwitterCredentials::OAUTH_ACCESS_TOKEN        => getenv( 'TWITTER_OAUTH_ACCESS_TOKEN' ) ?: '111356320-w6gJ7Z2WWAVVdUphls5V8vN8RwBqeM2o9fM9tG7E',
 	TwitterCredentials::OAUTH_ACCESS_TOKEN_SECRET => getenv( 'TWITTER_OAUTH_ACCESS_TOKEN_SECRET' ) ?: 'ColsGddb5SSGwzICmJjnq9HltR5m9JnTY4YqkLAQR5uU0',

@@ -4,6 +4,12 @@ namespace WordCampEurope\Workshop\Exception;
 
 use InvalidArgumentException;
 
+/**
+ * Exception class that is thrown when an invalid escaping context was
+ * requested.
+ *
+ * This exceptions extends the SPL InvalidArgumentException.
+ */
 class InvalidEscapeContext extends InvalidArgumentException {
 
 	/**

@@ -3,13 +3,21 @@
 namespace WordCampEurope\Workshop\Block;
 
 use WordCampEurope\Workshop\Asset;
-use WordCampEurope\Workshop\Config\OrderStrategies;
+use WordCampEurope\Workshop\Config\SortingStrategies;
 use WordCampEurope\Workshop\Config\SocialNetworks;
 use WordCampEurope\Workshop\SocialNetwork\Attributes;
 use WordCampEurope\Workshop\SocialNetwork\FeedFactory;
 use WordCampEurope\Workshop\SocialNetwork\FuzzyDateFormatter;
 use WordCampEurope\Workshop\View\ViewFactory;
 
+/**
+ * This is the main class that represents our custom Gutenberg block.
+ *
+ * It contains all the references to the JS & CSS assets, and it handles the
+ * basic mapping of the attributes. Everything that is not part of the
+ * extensible collection of social networks or the extensible collection of
+ * sorting strategies is defined in here.
+ */
 final class SocialMediaMentions extends GutenbergBlock {
 
 	const BLOCK_NAME = 'wceu2018/mentions';
@@ -19,7 +27,7 @@ final class SocialMediaMentions extends GutenbergBlock {
 	const BLOCK_CSS        = 'mentions-block';
 
 	const SOCIAL_NETWORKS_INLINE_SCRIPT = 'wceu2018_social_media_mentions_network_labels';
-	const ORDER_STRATEGY_INLINE_SCRIPT  = 'wceu2018_social_media_mentions_order_strategy_labels';
+	const ORDER_STRATEGY_INLINE_SCRIPT  = 'wceu2018_social_media_mentions_sorting_strategy_labels';
 
 	const FRONTEND_VIEW = 'templates/social-media-mentions';
 
@@ -38,29 +46,30 @@ final class SocialMediaMentions extends GutenbergBlock {
 	private $networks;
 
 	/**
-	 * Available order strategies.
+	 * Available sorting strategies.
 	 *
-	 * @var OrderStrategies
+	 * @var SortingStrategies
 	 */
-	private $order_strategies;
+	private $sorting_strategies;
 
 	/**
 	 * Instantiate a SocialMediaMentions object.
 	 *
-	 * @param FeedFactory     $feed_factory     Feed factory to use.
-	 * @param ViewFactory     $view_factory     View factory to use.
-	 * @param SocialNetworks  $networks         Available social networks.
-	 * @param OrderStrategies $order_strategies Available order strategies.
+	 * @param FeedFactory       $feed_factory       Feed factory to use.
+	 * @param ViewFactory       $view_factory       View factory to use.
+	 * @param SocialNetworks    $networks           Available social networks.
+	 * @param SortingStrategies $sorting_strategies Available sorting
+	 *                                              strategies.
 	 */
 	public function __construct(
 		FeedFactory $feed_factory,
 		ViewFactory $view_factory,
 		SocialNetworks $networks,
-		OrderStrategies $order_strategies
+		SortingStrategies $sorting_strategies
 	) {
-		$this->feed_factory     = $feed_factory;
-		$this->networks         = $networks;
-		$this->order_strategies = $order_strategies;
+		$this->feed_factory       = $feed_factory;
+		$this->networks           = $networks;
+		$this->sorting_strategies = $sorting_strategies;
 		parent::__construct( $view_factory );
 	}
 
@@ -105,7 +114,7 @@ final class SocialMediaMentions extends GutenbergBlock {
 			),
 			new Asset\InlineScript(
 				self::BLOCK_EDITOR_JS,
-				$this->get_order_strategy_labels_script(),
+				$this->get_sorting_strategy_labels_script(),
 				'before'
 			),
 		];
@@ -178,13 +187,13 @@ final class SocialMediaMentions extends GutenbergBlock {
 	}
 
 	/**
-	 * Get the order strategy label data as a JavaScript script to inline.
+	 * Get the sorting strategy label data as a JavaScript script to inline.
 	 *
 	 * @return string JavaScript script to inline.
 	 */
-	protected function get_order_strategy_labels_script(): string {
+	protected function get_sorting_strategy_labels_script(): string {
 		$labels = [];
-		foreach ( $this->order_strategies as $strategy => $attributes ) {
+		foreach ( $this->sorting_strategies as $strategy => $attributes ) {
 			$labels[] = [
 				'value' => $strategy,
 				'label' => $attributes['label'],

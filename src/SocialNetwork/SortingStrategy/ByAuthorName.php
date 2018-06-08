@@ -1,11 +1,18 @@
 <?php declare( strict_types=1 );
 
-namespace WordCampEurope\Workshop\SocialNetwork\OrderStrategy;
+namespace WordCampEurope\Workshop\SocialNetwork\SortingStrategy;
 
 use WordCampEurope\Workshop\SocialNetwork\FeedEntry;
-use WordCampEurope\Workshop\SocialNetwork\OrderStrategy;
+use WordCampEurope\Workshop\SocialNetwork\SortingStrategy;
 
-final class ByContentLength implements OrderStrategy {
+/**
+ * Sorting strategy that sorts feed entries by their author name.
+ *
+ * Pattern: Strategy
+ *
+ * @see http://designpatternsphp.readthedocs.io/en/latest/Behavioral/Strategy/README.html
+ */
+final class ByAuthorName implements SortingStrategy {
 
 	/**
 	 * Comparison callback for the given strategy.
@@ -18,6 +25,6 @@ final class ByContentLength implements OrderStrategy {
 	 *             than, equal to, or greater than the second.
 	 */
 	public function compare( FeedEntry $a, FeedEntry $b ): int {
-		return mb_strlen( $a->get_content() ) - mb_strlen( $b->get_content() );
+		return mb_strtolower( $a->get_author_name() ) <=> mb_strtolower( $b->get_author_name() );
 	}
 }

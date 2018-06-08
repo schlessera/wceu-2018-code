@@ -1,5 +1,13 @@
-<div class="wp-block-wceu2018-mentions">
-	<?php foreach( $this->feed_entries as $entry ) { ?>
+<?php declare( strict_types=1 );
+
+namespace WordCampEurope\Workshop;
+
+/*
+ * View template that lets us render our custom Gutenberg block HTML.
+ */
+
+?><div class="wp-block-wceu2018-mentions">
+	<?php foreach( $this->feed_entries as /** @var SocialNetwork\FeedEntry $entry */ $entry ) { ?>
 		<div class="media">
 			<img src="<?= $entry->get_avatar_image_url() ?>" class="media--img">
 			<div class="media--bd">

@@ -5,6 +5,17 @@ namespace WordCampEurope\Workshop\SocialNetwork;
 use WordCampEurope\Workshop\Config\SocialNetworks;
 use WordCampEurope\Workshop\Exception\MissingConfigKey;
 
+/**
+ * Instantiates and returns an implementation of the Feed interface, based on a
+ * network identifier that is provided.
+ *
+ * The identifier is the value of the select drop-down in the block settings,
+ * so we don't need to use any conditional logic or other magic.
+ *
+ * Pattern: Simple Factory
+ *
+ * @see http://designpatternsphp.readthedocs.io/en/latest/Creational/SimpleFactory/README.html
+ */
 final class FeedFactory {
 
 	/**
@@ -15,24 +26,24 @@ final class FeedFactory {
 	private $networks;
 
 	/**
-	 * Order strategy factory to use for ordering feeds.
+	 * Sorting strategy factory to use for ordering feeds.
 	 *
-	 * @var OrderStrategyFactory
+	 * @var SortingStrategyFactory
 	 */
-	private $order_strategy_factory;
+	private $sorting_strategy_factory;
 
 	/**
 	 * Instantiate a FeedFactory object.
 	 *
 	 * @param SocialNetworks $networks Social networks configuration data.
-	 * @param OrderStrategyFactory Factory for creating order strategy.
+	 * @param SortingStrategyFactory Factory for creating sorting strategy.
 	 */
 	public function __construct(
 		SocialNetworks $networks,
-		OrderStrategyFactory $order_strategy_factory
+		SortingStrategyFactory $sorting_strategy_factory
 	) {
-		$this->networks               = $networks;
-		$this->order_strategy_factory = $order_strategy_factory;
+		$this->networks                 = $networks;
+		$this->sorting_strategy_factory = $sorting_strategy_factory;
 	}
 
 	/**
@@ -50,7 +61,7 @@ final class FeedFactory {
 		return new CachingFeed(
 			new OrderedFeed(
 				$this->get_feed_for_network( $attributes->network() ),
-				$this->order_strategy_factory->create( $attributes->order_strategy() )
+				$this->sorting_strategy_factory->create( $attributes->sorting_strategy() )
 			)
 		);
 	}

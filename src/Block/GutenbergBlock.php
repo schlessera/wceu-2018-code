@@ -8,6 +8,12 @@ use WordCampEurope\Workshop\Renderable;
 use WordCampEurope\Workshop\View\EscapeContext;
 use WordCampEurope\Workshop\View\ViewFactory;
 
+/**
+ * This is an abstraction of a basic Gutenberg block.
+ *
+ * It manages the asset handling and provides and the rendering callback that is
+ * mapped to an external templated view.
+ */
 abstract class GutenbergBlock implements Registerable, Renderable {
 
 	const EDITOR_SCRIPT = 'editor_script';

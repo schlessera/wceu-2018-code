@@ -5,6 +5,9 @@ namespace WordCampEurope\Workshop\SocialNetwork\WordPress;
 use WordCampEurope\Workshop\SocialNetwork\Attributes;
 use WordCampEurope\Workshop\SocialNetwork\Feed as FeedInterface;
 
+/**
+ * Feed of entries for the WordPress.com social network.
+ */
 final class Feed implements FeedInterface {
 
 	/**

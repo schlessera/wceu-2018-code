@@ -6,6 +6,15 @@ use WordCampEurope\Workshop\Exception\FailedToLoadView;
 use WordCampEurope\Workshop\Exception\InvalidURI;
 use WordCampEurope\Workshop\View;
 
+/**
+ * Base implementation of the View interface.
+ *
+ * It uses PHP output buffering to render a standard PHP template into a string.
+ *
+ * Pattern: Template View
+ *
+ * @see https://martinfowler.com/eaaCatalog/templateView.html
+ */
 class BaseView implements View {
 
 	/**

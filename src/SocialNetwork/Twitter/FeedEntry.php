@@ -7,6 +7,9 @@ use DateTimeImmutable;
 use Exception;
 use WordCampEurope\Workshop\SocialNetwork\FeedEntry as FeedEntryInterface;
 
+/**
+ * A single entry of the Twitter social media feed.
+ */
 final class FeedEntry implements FeedEntryInterface {
 
 	const LINK_TAG         = '<a href="%s" class="%s">%s</a>';

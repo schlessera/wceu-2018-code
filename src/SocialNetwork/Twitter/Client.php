@@ -6,6 +6,10 @@ use WordCampEurope\Workshop\Config\TwitterCredentials as Credentials;
 use TwitterAPIExchange;
 use Exception;
 
+/**
+ * Remote API client that connects to the Twitter API and fetches the requested
+ * results.
+ */
 final class Client {
 
 	const URL = 'https://api.twitter.com/1.1/search/tweets.json';

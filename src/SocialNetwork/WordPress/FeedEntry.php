@@ -7,6 +7,9 @@ use DateTimeImmutable;
 use Exception;
 use WordCampEurope\Workshop\SocialNetwork\FeedEntry as FeedEntryInterface;
 
+/**
+ * A single entry of the WordPress.com social media feed.
+ */
 final class FeedEntry implements FeedEntryInterface {
 
 	const LINK_TAG  = '<a href="%s" class="%s">%s</a>';
@@ -96,7 +99,6 @@ final class FeedEntry implements FeedEntryInterface {
 	public function get_avatar_image_url(): string {
 		return $this->get_author_field( 'avatar_URL' );
 	}
-
 
 	/**
 	 * Get a given field from the author data.

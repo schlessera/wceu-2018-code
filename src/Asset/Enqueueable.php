@@ -2,6 +2,9 @@
 
 namespace WordCampEurope\Workshop\Asset;
 
+/**
+ * Segregated interface for an asset that can be enqueued.
+ */
 interface Enqueueable {
 
 	/**

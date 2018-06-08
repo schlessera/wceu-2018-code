@@ -4,6 +4,10 @@ namespace WordCampEurope\Workshop\Config;
 
 use WordCampEurope\Workshop\Exception\MissingConfigKey;
 
+/**
+ * Configuration object that provides the list of available social network
+ * implementations and their configuration details.
+ */
 final class SocialNetworks extends BaseConfig {
 
 	/**

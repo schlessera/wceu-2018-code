@@ -4,6 +4,16 @@ namespace WordCampEurope\Workshop\Asset\Location;
 
 use WordCampEurope\Workshop\Asset\Location;
 
+/**
+ * Decorator that makes a given asset aware of minification.
+ *
+ * This way, we can add or omit the '.min' filename suffix, depending on
+ * whether the constant SCRIPT_DEBUG is true.
+ *
+ * Pattern: Decorator
+ *
+ * @see http://designpatternsphp.readthedocs.io/en/latest/Structural/Decorator/README.html
+ */
 final class Minifiable implements Location {
 
 	const SUFFIX = '.min';

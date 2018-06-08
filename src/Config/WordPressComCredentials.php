@@ -4,6 +4,10 @@ namespace WordCampEurope\Workshop\Config;
 
 use WordCampEurope\Workshop\Exception\MissingConfigKey;
 
+/**
+ * Configuration object that provides the credentials for the WordPress.com
+ * Remote API Client implementation.
+ */
 final class WordPressComCredentials extends BaseConfig {
 
 	const CLIENT_ID     = 'client_id';

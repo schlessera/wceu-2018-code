@@ -22,7 +22,7 @@
 				type: 'integer',
 				default: 5
 			},
-			order_strategy: {
+			sorting_strategy: {
 				type: 'text',
 				default: sortingOptions[ 0 ].value
 			}
@@ -76,10 +76,10 @@
 						el( components.SelectControl, {
 							label: __( 'How to sort the results' ),
 							options: sortingOptions,
-							value: props.attributes.order_strategy,
+							value: props.attributes.sorting_strategy,
 							onChange: function ( value ) {
 								props.setAttributes(
-									{ order_strategy: value }
+									{ sorting_strategy: value }
 								);
 							}
 						} )
@@ -99,5 +99,5 @@
 	window.wp.i18n,
 	window.wp.element,
 	window.wceu2018_social_media_mentions_network_labels,
-	window.wceu2018_social_media_mentions_order_strategy_labels
+	window.wceu2018_social_media_mentions_sorting_strategy_labels
 );

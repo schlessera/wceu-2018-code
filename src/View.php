@@ -2,6 +2,13 @@
 
 namespace WordCampEurope\Workshop;
 
+/**
+ * View interface.
+ *
+ * Pattern: Template View
+ *
+ * @see https://martinfowler.com/eaaCatalog/templateView.html
+ */
 interface View extends Renderable {
 
 	/**

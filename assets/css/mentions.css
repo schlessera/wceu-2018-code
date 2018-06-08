@@ -1,7 +1,6 @@
 /**
- * The following styles get applied both on the front of your site and in the editor.
- *
- * Replace them with your own styles or remove the file completely.
+ * The following styles get applied both on the front of your site and in the
+ * editor.
  */
 
 .wp-block-wceu2018-mentions .media {
@@ -24,7 +23,9 @@
 
 .wp-block-wceu2018-mentions .media,
 .wp-block-wceu2018-mentions .media--bd {
-	overflow: hidden; _overflow: visible; zoom: 1;
+	overflow: hidden;
+	_overflow: visible;
+	zoom: 1;
 }
 
 .wp-block-wceu2018-mentions .media .media--img {

@@ -2,6 +2,9 @@
 
 namespace WordCampEurope\Workshop\SocialNetwork;
 
+/**
+ * A feed represents a collection of feed entries for a specific social network.
+ */
 interface Feed {
 
 	/**

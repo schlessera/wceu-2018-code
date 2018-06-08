@@ -2,6 +2,9 @@
 
 namespace WordCampEurope\Workshop;
 
+/**
+ * Segregated interface of something that can be rendered.
+ */
 interface Renderable {
 
 	/**

@@ -4,6 +4,11 @@ namespace WordCampEurope\Workshop\Exception;
 
 use DomainException;
 
+/**
+ * Exception class that is thrown when a required configuration key is missing.
+ *
+ * This exceptions extends the SPL DomainException.
+ */
 class MissingConfigKey extends DomainException {
 
 	/**
@@ -85,15 +90,15 @@ class MissingConfigKey extends DomainException {
 	 * Create a new instance of the exception for a missing or invalid order
 	 * strategy implementation.
 	 *
-	 * @param string $name Name of the order strategy.
+	 * @param string $name Name of the sorting strategy.
 	 *
 	 * @return static
 	 */
-	public static function from_order_strategy_implementation(
+	public static function from_sorting_strategy_implementation(
 		string $name
 	): MissingConfigKey {
 		$message = sprintf(
-			'The configuration for the order strategy "%s" is missing a valid implementation class.',
+			'The configuration for the sorting strategy "%s" is missing a valid implementation class.',
 			$name
 		);
 
@@ -104,15 +109,15 @@ class MissingConfigKey extends DomainException {
 	 * Create a new instance of the exception for a missing or invalid order
 	 * strategy label.
 	 *
-	 * @param string $name Name of the order strategy.
+	 * @param string $name Name of the sorting strategy.
 	 *
 	 * @return static
 	 */
-	public static function from_order_strategy_label(
+	public static function from_sorting_strategy_label(
 		string $name
 	): MissingConfigKey {
 		$message = sprintf(
-			'The configuration for the order strategy "%s" is missing a label.',
+			'The configuration for the sorting strategy "%s" is missing a label.',
 			$name
 		);
 

@@ -1,11 +1,18 @@
 <?php declare( strict_types=1 );
 
-namespace WordCampEurope\Workshop\SocialNetwork\OrderStrategy;
+namespace WordCampEurope\Workshop\SocialNetwork\SortingStrategy;
 
 use WordCampEurope\Workshop\SocialNetwork\FeedEntry;
-use WordCampEurope\Workshop\SocialNetwork\OrderStrategy;
+use WordCampEurope\Workshop\SocialNetwork\SortingStrategy;
 
-final class ByPublicationDate implements OrderStrategy {
+/**
+ * Sorting strategy that sorts feed entries by their content length.
+ *
+ * Pattern: Strategy
+ *
+ * @see http://designpatternsphp.readthedocs.io/en/latest/Behavioral/Strategy/README.html
+ */
+final class ByContentLength implements SortingStrategy {
 
 	/**
 	 * Comparison callback for the given strategy.
@@ -18,6 +25,6 @@ final class ByPublicationDate implements OrderStrategy {
 	 *             than, equal to, or greater than the second.
 	 */
 	public function compare( FeedEntry $a, FeedEntry $b ): int {
-		return $b->get_posted_time() <=> $a->get_posted_time();
+		return mb_strlen( $a->get_content() ) - mb_strlen( $b->get_content() );
 	}
 }

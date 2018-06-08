@@ -2,6 +2,9 @@
 
 namespace WordCampEurope\Workshop\Asset;
 
+/**
+ * Interface for an asset location.
+ */
 interface Location {
 
 	/**

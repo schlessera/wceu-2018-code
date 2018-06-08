@@ -2,6 +2,15 @@
 
 namespace WordCampEurope\Workshop\SocialNetwork;
 
+/**
+ * Turns an implementation of the Feed interface that represents a collection
+ * of feed entries into a cached collection of feed entries that only get
+ * recalculated when the cache expires or when the attributes change.
+ *
+ * Pattern: Decorator
+ *
+ * @see http://designpatternsphp.readthedocs.io/en/latest/Structural/Decorator/README.html
+ */
 final class CachingFeed implements Feed {
 
 	/**

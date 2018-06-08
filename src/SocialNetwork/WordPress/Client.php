@@ -4,6 +4,10 @@ namespace WordCampEurope\Workshop\SocialNetwork\WordPress;
 
 use WordCampEurope\Workshop\Config\WordPressComCredentials as Credentials;
 
+/**
+ * Remote API client that connects to the WordPress.com API and fetches the
+ * requested results.
+ */
 final class Client {
 
 	const API_ROOT                = 'https://public-api.wordpress.com/';

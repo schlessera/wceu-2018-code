@@ -5,6 +5,14 @@ namespace WordCampEurope\Workshop\View;
 use WordCampEurope\Workshop\Exception\InvalidEscapeContext;
 use WordCampEurope\Workshop\View;
 
+/**
+ * Simple factory that instantiates an implementation of the View interface,
+ * based on a given URI and an escaping context.
+ *
+ * Pattern: Simple Factory
+ *
+ * @see http://designpatternsphp.readthedocs.io/en/latest/Creational/SimpleFactory/README.html
+ */
 final class TemplatedViewFactory implements ViewFactory {
 
 	/**

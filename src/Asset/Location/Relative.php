@@ -4,6 +4,10 @@ namespace WordCampEurope\Workshop\Asset\Location;
 
 use WordCampEurope\Workshop\Asset\Location;
 
+/**
+ * Relative location implementation hat will be turned into absolute URIs or
+ * paths as needed.
+ */
 final class Relative implements Location {
 
 	/**

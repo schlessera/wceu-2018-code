@@ -4,6 +4,13 @@ namespace WordCampEurope\Workshop\Config;
 
 use ArrayObject;
 
+/**
+ * Base configuration object that all of our configs extend.
+ *
+ * We use the built-in PHP ArrayObject for some of its convenient
+ * out-of-the-box behavior. This makes our Config iterable and provides indexed
+ * array access as well.
+ */
 abstract class BaseConfig extends ArrayObject {
 
 	/**
@@ -13,7 +20,7 @@ abstract class BaseConfig extends ArrayObject {
 	 */
 	public function __construct( $config = array() ) {
 		// Make sure the config entries can be accessed as properties.
-		parent::__construct( $config, \ArrayObject::ARRAY_AS_PROPS );
+		parent::__construct( $config, ArrayObject::ARRAY_AS_PROPS );
 
 		$this->validate_config();
 	}
@@ -23,7 +30,7 @@ abstract class BaseConfig extends ArrayObject {
 	 *
 	 * @param string $filename Relative filename of the config file.
 	 *
-	 * @return BaseConfig
+	 * @return static
 	 */
 	public static function create_from_file( string $filename ) {
 		$root = dirname( __DIR__, 2 ) . '/config';

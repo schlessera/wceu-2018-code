@@ -20,10 +20,14 @@ if ( is_readable( $autoloader ) ) {
 }
 
 // This is the collection of networks we have access to.
-$networks = Config\SocialNetworks::create_from_file( 'social-networks.php' );
+$networks = Config\SocialNetworks::create_from_file(
+	'social-networks.php'
+);
 
 // This is the collection of sorting strategies we have access to.
-$sorting_strategies = Config\SortingStrategies::create_from_file( 'sorting-strategies.php' );
+$sorting_strategies = Config\SortingStrategies::create_from_file(
+	'sorting-strategies.php'
+);
 
 // We need an sorting strategy factory so that the block logic can ignore the
 // actual sorting logic and we can move that into separate objects and make
@@ -35,7 +39,7 @@ $sorting_strategy_factory = new SocialNetwork\SortingStrategyFactory(
 // We use the transient caching engine by default here. The object cache makes
 // sense on high traffic sites with a persistent object cache, while the
 // volatile cache is useful for testing.
-$caching_engine = new CachingEngine\TransientCache;
+$caching_engine = new CachingEngine\TransientCache();
 
 // Now we instantiate a feed factory that our Gutenberg block will later be able
 // to use to instantiate feeds.

@@ -41,16 +41,15 @@ final class Client {
 		$search_string = urlencode( $mention );
 		$url_arguments = "?q={$search_string}&number={$limit}";
 
-		$url  = self::FEED_ENDPOINT . $url_arguments;
-		$args = [];
-
-		$access_token = $this->credentials->get_access_token();
-		if ( ! empty( $access_token ) ) {
-			$args['headers']['Authorization'] = "Bearer {$access_token}";
-		}
+		$url = self::FEED_ENDPOINT . $url_arguments;
+		$args = [
+			'headers' => [
+				'Authorization' => "Bearer " . $this->credentials->offsetGet( $this->credentials::API_TOKEN ),
+			],
+		];
 
 		$response = wp_remote_get( $url, $args );
-		$code     = wp_remote_retrieve_response_code( $response );
+		$code = wp_remote_retrieve_response_code( $response );
 
 		if ( (int) $code !== 200 ) {
 			// The WordPress.com API produced an error, so just return an empty

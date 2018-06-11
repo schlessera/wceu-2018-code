@@ -13,8 +13,7 @@ namespace WordCampEurope\Workshop\Config;
  */
 
 return [
-	WordPressComCredentials::CLIENT_ID     => getenv( 'WORDPRESS_COM_CLIENT_ID' ) ?: '',
-	WordPressComCredentials::CLIENT_SECRET => getenv( 'WORDPRESS_COM_CLIENT_SECRET' ) ?: '',
-	WordPressComCredentials::USERNAME      => getenv( 'WORDPRESS_COM_USERNAME' ) ?: '',
-	WordPressComCredentials::PASSWORD      => getenv( 'WORDPRESS_COM_PASSWORD' ) ?: '',
+	WordPressComCredentials::CLIENT_ID     => getenv( 'WORDPRESS_COM_CLIENT_ID' ),
+	WordPressComCredentials::CLIENT_SECRET => getenv( 'WORDPRESS_COM_CLIENT_SECRET' ),
+	WordPressComCredentials::API_TOKEN     => getenv( 'WORDPRESS_COM_API_TOKEN' ),
 ];

@@ -1,4 +1,4 @@
-( function ( blocks, editor, components, i18n, element, networkOptions ) {
+( function ( blocks, editor, components, i18n, element ) {
 
 	var el = element.createElement;
 	var __ = i18n.__;
@@ -12,7 +12,7 @@
 		attributes: {
 			network: {
 				type: 'text',
-				default: networkOptions[ 0 ].value
+				default: 'twitter'
 			},
 			mention: {
 				type: 'text',
@@ -39,16 +39,6 @@
 							className: 'block-social-mentions',
 							initialOpen: true
 						},
-						el( components.SelectControl, {
-							label: __( 'Network to pull mentions from' ),
-							options: networkOptions,
-							value: props.attributes.network,
-							onChange: function ( value ) {
-								props.setAttributes(
-									{ network: value }
-								);
-							}
-						} ),
 						el( components.TextControl, {
 							label: __( 'Mention to look for' ),
 							value: props.attributes.mention,
@@ -83,6 +73,5 @@
 	window.wp.editor,
 	window.wp.components,
 	window.wp.i18n,
-	window.wp.element,
-	window.wceu2018_social_media_mentions_network_labels
+	window.wp.element
 );

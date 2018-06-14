@@ -2,7 +2,9 @@
 
 namespace WordCampEurope\Workshop;
 
+use WordCampEurope\Workshop\Config\TwitterCredentials;
 use WordCampEurope\Workshop\Exception\MissingDependency;
+use WordCampEurope\Workshop\SocialNetwork\Twitter\Client;
 
 /**
  * Plugins main class that is responsible of composing the object graph required to
@@ -15,16 +17,10 @@ class Plugin
 	 * Compose our object graph
 	 */
 	public function compose() {
-		// This is the collection of networks we have access to.
-		$networks = Config\SocialNetworks::create_from_file(
-			'social-networks.php'
-		);
-
 		// Now we instantiate a feed factory that our Gutenberg block will later be able
 		// to use to instantiate feeds.
-		$feed_factory = new SocialNetwork\FeedFactory(
-			$networks
-		);
+		$client = new Client( TwitterCredentials::create_from_file( 'twitter-credentials.php' ) );
+		$feed = new SocialNetwork\Twitter\Feed( $client );
 
 		// We also need a view factory for our Gutenberg block. We use a "templated" one
 		// that allows for the view templates to be overridden through parent and child
@@ -38,9 +34,8 @@ class Plugin
 		// Then we can instantiate the Gutenberg block and inject all of its
 		// dependencies.
 		$social_media_mentions = new Block\SocialMediaMentions(
-			$feed_factory,
-			$view_factory,
-			$networks
+			$feed,
+			$view_factory
 		);
 
 		// Finally, we hook up our Gutenberg to the WordPress lifecycle.

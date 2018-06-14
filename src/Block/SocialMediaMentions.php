@@ -5,10 +5,9 @@ namespace WordCampEurope\Workshop\Block;
 use WordCampEurope\Workshop\Asset;
 use WordCampEurope\Workshop\Config\SocialNetworks;
 use WordCampEurope\Workshop\SocialNetwork\Attributes;
-use WordCampEurope\Workshop\SocialNetwork\FeedFactory;
+use WordCampEurope\Workshop\SocialNetwork\Feed;
 use WordCampEurope\Workshop\SocialNetwork\FuzzyDateFormatter;
 use WordCampEurope\Workshop\View\ViewFactory;
-
 
 /**
  * This is the main class that represents our custom Gutenberg block.
@@ -21,43 +20,30 @@ final class SocialMediaMentions extends GutenbergBlock {
 
 	const BLOCK_NAME = 'wceu2018/mentions';
 
-	const BLOCK_EDITOR_JS  = 'mentions-block-editor';
+	const BLOCK_EDITOR_JS = 'mentions-block-editor';
 	const BLOCK_EDITOR_CSS = 'mentions-block-editor';
-	const BLOCK_CSS        = 'mentions-block';
-
-	const SOCIAL_NETWORKS_INLINE_SCRIPT = 'wceu2018_social_media_mentions_network_labels';
+	const BLOCK_CSS = 'mentions-block';
 
 	const FRONTEND_VIEW = 'templates/social-media-mentions';
 
 	/**
-	 * Feed factory to use.
+	 * Feed to use.
 	 *
-	 * @var FeedFactory
+	 * @var Feed
 	 */
-	private $feed_factory;
-
-	/**
-	 * Available social networks.
-	 *
-	 * @var SocialNetworks
-	 */
-	private $networks;
+	private $feed;
 
 	/**
 	 * Instantiate a SocialMediaMentions object.
 	 *
-	 * @param FeedFactory       $feed_factory       Feed factory to use.
-	 * @param ViewFactory       $view_factory       View factory to use.
-	 * @param SocialNetworks    $networks           Available social networks.
-	 *                                              strategies.
+	 * @param Feed        $feed         Feed to use.
+	 * @param ViewFactory $view_factory View factory to use.
 	 */
 	public function __construct(
-		FeedFactory $feed_factory,
-		ViewFactory $view_factory,
-		SocialNetworks $networks
+		Feed $feed,
+		ViewFactory $view_factory
 	) {
-		$this->feed_factory       = $feed_factory;
-		$this->networks           = $networks;
+		$this->feed = $feed;
 		parent::__construct( $view_factory );
 	}
 
@@ -95,11 +81,6 @@ final class SocialMediaMentions extends GutenbergBlock {
 				),
 				[ 'wp-editor' ]
 			),
-			new Asset\InlineScript(
-				self::BLOCK_EDITOR_JS,
-				$this->get_social_network_labels_script(),
-				'before'
-			)
 		];
 	}
 
@@ -140,33 +121,10 @@ final class SocialMediaMentions extends GutenbergBlock {
 	protected function get_frontend_context( array $context ): array {
 		$attributes = Attributes::from_context( $context );
 
-		$feed = $this->feed_factory->create( $attributes );
-
 		return [
-			'feed_entries'   => $feed->get_entries( $attributes ),
+			'feed_entries'   => $this->feed->get_entries( $attributes ),
 			'date_formatter' => new FuzzyDateFormatter(),
 		];
-	}
-
-	/**
-	 * Get the network label data as a JavaScript script to inline.
-	 *
-	 * @return string JavaScript script to inline.
-	 */
-	protected function get_social_network_labels_script(): string {
-		$labels = [];
-		foreach ( $this->networks as $network => $attributes ) {
-			$labels[] = [
-				'value' => $network,
-				'label' => $attributes['label'],
-			];
-		}
-
-		return sprintf(
-			'var %s = %s;',
-			self::SOCIAL_NETWORKS_INLINE_SCRIPT,
-			json_encode( $labels )
-		);
 	}
 
 }

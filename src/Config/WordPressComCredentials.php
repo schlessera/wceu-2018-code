@@ -2,7 +2,6 @@
 
 namespace WordCampEurope\Workshop\Config;
 
-use WordCampEurope\Workshop\CachingEngine;
 use WordCampEurope\Workshop\Exception\MissingConfigKey;
 
 /**

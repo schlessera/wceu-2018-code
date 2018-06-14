@@ -20,19 +20,10 @@ class Plugin
 			'social-networks.php'
 		);
 
-		// WCEU Implement
-
-		// We use the transient caching engine by default here. The object cache makes
-		// sense on high traffic sites with a persistent object cache, while the
-		// volatile cache is useful for testing.
-		//$caching_engine = new CachingEngine\VolatileCache();
-		$caching_engine = new CachingEngine\TransientCache();
-
 		// Now we instantiate a feed factory that our Gutenberg block will later be able
 		// to use to instantiate feeds.
 		$feed_factory = new SocialNetwork\FeedFactory(
-			$networks,
-			$caching_engine
+			$networks
 		);
 
 		// We also need a view factory for our Gutenberg block. We use a "templated" one

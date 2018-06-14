@@ -13,6 +13,4 @@ namespace WordCampEurope\Workshop;
  */
 abstract class CachingEngine {
 
-	// WCEU Implement
-
 }

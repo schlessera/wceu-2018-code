@@ -2,7 +2,6 @@
 
 namespace WordCampEurope\Workshop\SocialNetwork;
 
-use WordCampEurope\Workshop\CachingEngine;
 use WordCampEurope\Workshop\Config\SocialNetworks;
 use WordCampEurope\Workshop\Exception\MissingConfigKey;
 
@@ -27,23 +26,14 @@ final class FeedFactory {
 	private $networks;
 
 	/**
-	 * Caching engine that the CachingFeed decorator will use.
-	 *
-	 * @var CachingEngine
-	 */
-	private $caching_engine;
-
-	/**
 	 * Instantiate a FeedFactory object.
 	 *
 	 * @param SocialNetworks $networks Social networks configuration data.
 	 */
 	public function __construct(
-		SocialNetworks $networks,
-		CachingEngine $caching_engine
+		SocialNetworks $networks
 	) {
-		$this->networks                 = $networks;
-		$this->caching_engine           = $caching_engine;
+		$this->networks = $networks;
 	}
 
 	/**
@@ -59,8 +49,7 @@ final class FeedFactory {
 		}
 
 		return new CachingFeed(
-			$this->get_feed_for_network( $attributes->network() ),
-			$this->caching_engine
+			$this->get_feed_for_network( $attributes->network() )
 		);
 	}
 

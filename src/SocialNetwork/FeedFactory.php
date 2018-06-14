@@ -48,9 +48,7 @@ final class FeedFactory {
 			throw MissingConfigKey::from_network( $attributes->network() );
 		}
 
-		return new CachingFeed(
-			$this->get_feed_for_network( $attributes->network() )
-		);
+		return $this->get_feed_for_network( $attributes->network() );
 	}
 
 	/**

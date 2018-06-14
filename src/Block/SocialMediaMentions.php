@@ -3,7 +3,6 @@
 namespace WordCampEurope\Workshop\Block;
 
 use WordCampEurope\Workshop\Asset;
-use WordCampEurope\Workshop\Config\SocialNetworks;
 use WordCampEurope\Workshop\SocialNetwork\Attributes;
 use WordCampEurope\Workshop\SocialNetwork\Feed;
 use WordCampEurope\Workshop\SocialNetwork\FuzzyDateFormatter;

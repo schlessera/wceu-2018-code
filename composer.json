@@ -1,0 +1,24 @@
+{
+	"name": "schlessera/wceu-2018-code",
+	"license": "GPL-2.0-or-later",
+	"authors": [
+		{
+			"name": "David Mosterd",
+			"email": "david@codepress.nl"
+		},
+		{
+			"name": "Alain Schlesser",
+			"email": "alain.schlesser@gmail.com"
+		}
+	],
+	"require": {
+		"php": ">=7.0",
+		"j7mbo/twitter-api-php": "^1.0",
+		"cakephp/chronos": "^1.1"
+	},
+	"autoload": {
+		"psr-4": {
+			"WordCampEurope\\Workshop\\": "src/"
+		}
+	}
+}

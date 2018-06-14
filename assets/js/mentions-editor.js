@@ -1,4 +1,4 @@
-( function ( blocks, editor, components, i18n, element, networkOptions, sortingOptions ) {
+( function ( blocks, editor, components, i18n, element, networkOptions ) {
 
 	var el = element.createElement;
 	var __ = i18n.__;

@@ -27,13 +27,6 @@ final class FeedFactory {
 	private $networks;
 
 	/**
-	 * Sorting strategy factory to use for ordering feeds.
-	 *
-	 * @var SortingStrategyFactory
-	 */
-	private $sorting_strategy_factory;
-
-	/**
 	 * Caching engine that the CachingFeed decorator will use.
 	 *
 	 * @var CachingEngine
@@ -44,15 +37,12 @@ final class FeedFactory {
 	 * Instantiate a FeedFactory object.
 	 *
 	 * @param SocialNetworks $networks Social networks configuration data.
-	 * @param SortingStrategyFactory Factory for creating sorting strategy.
 	 */
 	public function __construct(
 		SocialNetworks $networks,
-		SortingStrategyFactory $sorting_strategy_factory,
 		CachingEngine $caching_engine
 	) {
 		$this->networks                 = $networks;
-		$this->sorting_strategy_factory = $sorting_strategy_factory;
 		$this->caching_engine           = $caching_engine;
 	}
 
@@ -69,10 +59,7 @@ final class FeedFactory {
 		}
 
 		return new CachingFeed(
-			new OrderedFeed(
-				$this->get_feed_for_network( $attributes->network() ),
-				$this->sorting_strategy_factory->create( $attributes->sorting_strategy() )
-			),
+			$this->get_feed_for_network( $attributes->network() ),
 			$this->caching_engine
 		);
 	}

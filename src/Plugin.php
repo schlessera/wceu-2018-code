@@ -20,17 +20,7 @@ class Plugin
 			'social-networks.php'
 		);
 
-		// This is the collection of sorting strategies we have access to.
-		$sorting_strategies = Config\SortingStrategies::create_from_file(
-			'sorting-strategies.php'
-		);
-
-		// We need an sorting strategy factory so that the block logic can ignore the
-		// actual sorting logic and we can move that into separate objects and make
-		// it more future-proof that way.
-		$sorting_strategy_factory = new SocialNetwork\SortingStrategyFactory(
-			$sorting_strategies
-		);
+		// WCEU Implement
 
 		// We use the transient caching engine by default here. The object cache makes
 		// sense on high traffic sites with a persistent object cache, while the
@@ -42,7 +32,6 @@ class Plugin
 		// to use to instantiate feeds.
 		$feed_factory = new SocialNetwork\FeedFactory(
 			$networks,
-			$sorting_strategy_factory,
 			$caching_engine
 		);
 
@@ -60,8 +49,7 @@ class Plugin
 		$social_media_mentions = new Block\SocialMediaMentions(
 			$feed_factory,
 			$view_factory,
-			$networks,
-			$sorting_strategies
+			$networks
 		);
 
 		// Finally, we hook up our Gutenberg to the WordPress lifecycle.

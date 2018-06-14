@@ -9,21 +9,17 @@ namespace WordCampEurope\Workshop\SocialNetwork;
 final class Attributes {
 
 	const SCHEMA = [
-		'network'          => [
+		'network' => [
 			'type'    => 'text',
 			'default' => 'twitter',
 		],
-		'mention'          => [
+		'mention' => [
 			'type'    => 'text',
 			'default' => '#WCEU',
 		],
-		'limit'            => [
+		'limit'   => [
 			'type'    => 'integer',
 			'default' => 5,
-		],
-		'sorting_strategy' => [
-			'type'    => 'text',
-			'default' => 'by_publication_date',
 		],
 	];
 
@@ -49,30 +45,20 @@ final class Attributes {
 	private $limit;
 
 	/**
-	 * Strategy to use for ordering the entries.
-	 *
-	 * @var string
-	 */
-	private $sorting_strategy;
-
-	/**
 	 * Instantiate an Attributes object.
 	 *
-	 * @param string $network          Social network to search.
-	 * @param string $mention          Mention to search for.
-	 * @param int    $limit            Maximum number of entries to retrieve.
-	 * @param string $sorting_strategy Strategy to use for ordering the entries.
+	 * @param string $network Social network to search.
+	 * @param string $mention Mention to search for.
+	 * @param int    $limit   Maximum number of entries to retrieve.
 	 */
 	public function __construct(
 		string $network,
 		string $mention,
-		int $limit,
-		string $sorting_strategy
+		int $limit
 	) {
-		$this->network          = $network;
-		$this->mention          = $mention;
-		$this->limit            = $limit;
-		$this->sorting_strategy = $sorting_strategy;
+		$this->network = $network;
+		$this->mention = $mention;
+		$this->limit = $limit;
 	}
 
 	/**
@@ -86,8 +72,7 @@ final class Attributes {
 		return new self(
 			(string) ( $context['network'] ?? Attributes::SCHEMA['network']['default'] ),
 			(string) ( $context['mention'] ?? Attributes::SCHEMA['mention']['default'] ),
-			(int) ( $context['limit'] ?? Attributes::SCHEMA['limit']['default'] ),
-			(string) ( $context['sorting_strategy'] ?? Attributes::SCHEMA['sorting_strategy']['default'] )
+			(int) ( $context['limit'] ?? Attributes::SCHEMA['limit']['default'] )
 		);
 	}
 
@@ -98,10 +83,9 @@ final class Attributes {
 	 */
 	public function all(): array {
 		return [
-			'network'          => $this->network(),
-			'mention'          => $this->mention(),
-			'limit'            => $this->limit(),
-			'sorting_strategy' => $this->sorting_strategy(),
+			'network' => $this->network(),
+			'mention' => $this->mention(),
+			'limit'   => $this->limit(),
 		];
 	}
 
@@ -130,14 +114,5 @@ final class Attributes {
 	 */
 	public function limit(): int {
 		return $this->limit;
-	}
-
-	/**
-	 * Get the strategy with which to sort the entries.
-	 *
-	 * @return string Strategy with which to sort the entries.
-	 */
-	public function sorting_strategy(): string {
-		return $this->sorting_strategy;
 	}
 }

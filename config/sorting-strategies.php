@@ -13,6 +13,7 @@ use WordCampEurope\Workshop\SocialNetwork\SortingStrategy;
  */
 
 return [
+	// TODO leave the array, but remove the data
 	'by_publication_date' => [
 		'label'          => __( 'By Publication Date' ),
 		'implementation' => SortingStrategy\ByPublicationDate::class,

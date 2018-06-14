@@ -21,10 +21,6 @@
 			limit: {
 				type: 'integer',
 				default: 5
-			},
-			sorting_strategy: {
-				type: 'text',
-				default: sortingOptions[ 0 ].value
 			}
 		},
 
@@ -72,16 +68,6 @@
 									{ limit: value }
 								);
 							}
-						} ),
-						el( components.SelectControl, {
-							label: __( 'How to sort the results' ),
-							options: sortingOptions,
-							value: props.attributes.sorting_strategy,
-							onChange: function ( value ) {
-								props.setAttributes(
-									{ sorting_strategy: value }
-								);
-							}
 						} )
 					)
 				)
@@ -98,6 +84,5 @@
 	window.wp.components,
 	window.wp.i18n,
 	window.wp.element,
-	window.wceu2018_social_media_mentions_network_labels,
-	window.wceu2018_social_media_mentions_sorting_strategy_labels
+	window.wceu2018_social_media_mentions_network_labels
 );

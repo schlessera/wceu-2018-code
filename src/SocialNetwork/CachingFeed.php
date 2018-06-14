@@ -39,9 +39,8 @@ final class CachingFeed implements Feed {
 	 *
 	 * @param Feed $feed Feed to cache.
 	 */
-	public function __construct( Feed $feed, CachingEngine $cache ) {
-		$this->feed  = $feed;
-		$this->cache = $cache;
+	public function __construct( Feed $feed ) {
+		$this->feed = $feed;
 	}
 
 	/**

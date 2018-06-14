@@ -5,7 +5,8 @@ namespace WordCampEurope\Workshop;
 use WordCampEurope\Workshop\Config\TwitterCredentials;
 use WordCampEurope\Workshop\Config\WordPressComCredentials;
 use WordCampEurope\Workshop\Exception\MissingDependency;
-use WordCampEurope\Workshop\SocialNetwork;
+use WordCampEurope\Workshop\SocialNetwork\Twitter;
+use WordCampEurope\Workshop\SocialNetwork\WordPress;
 
 /**
  * Plugins main class that is responsible of composing the object graph required to
@@ -18,11 +19,15 @@ class Plugin
 	 * Compose our object graph
 	 */
 	public function compose() {
-		$client = new SocialNetwork\Twitter\Client( TwitterCredentials::create_from_file( 'twitter-credentials.php' ) );
-		$feed = new SocialNetwork\Twitter\Feed( $client );
+		$client = new Twitter\Client(
+			TwitterCredentials::create_from_file( 'twitter-credentials.php' )
+		);
+		$feed = new Twitter\Feed( $client );
 
-		$client = new SocialNetwork\WordPress\Client( WordPressComCredentials::create_from_file( 'wordpress-com-credentials.php' ) );
-		$feed = new SocialNetwork\WordPress\Feed( $client );
+		$client = new WordPress\Client(
+			WordPressComCredentials::create_from_file( 'wordpress-com-credentials.php' )
+		);
+		$feed = new WordPress\Feed( $client );
 
 		// We also need a view factory for our Gutenberg block. We use a "templated" one
 		// that allows for the view templates to be overridden through parent and child

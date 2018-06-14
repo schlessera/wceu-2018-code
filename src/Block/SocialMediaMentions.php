@@ -3,7 +3,6 @@
 namespace WordCampEurope\Workshop\Block;
 
 use WordCampEurope\Workshop\Asset;
-use WordCampEurope\Workshop\Config\SocialNetworks;
 use WordCampEurope\Workshop\SocialNetwork\Attributes;
 use WordCampEurope\Workshop\SocialNetwork\Feed;
 use WordCampEurope\Workshop\SocialNetwork\FuzzyDateFormatter;
@@ -13,8 +12,7 @@ use WordCampEurope\Workshop\View\ViewFactory;
  * This is the main class that represents our custom Gutenberg block.
  *
  * It contains all the references to the JS & CSS assets, and it handles the
- * basic mapping of the attributes. Everything that is not part of the
- * extensible collection of social networks.
+ * basic mapping of the attributes.
  */
 final class SocialMediaMentions extends GutenbergBlock {
 

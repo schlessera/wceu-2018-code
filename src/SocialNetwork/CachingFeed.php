@@ -50,7 +50,7 @@ final class CachingFeed implements Feed {
 		$value = $this->read( $key );
 
 		if ( false === $value ) {
-			$value = $this->feed->get_entries( $attributes )();
+			$value = $this->feed->get_entries( $attributes );
 			$this->write( $key, $value, 5 * MINUTE_IN_SECONDS );
 		}
 

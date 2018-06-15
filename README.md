@@ -14,16 +14,11 @@ Slides are available at [https://schlessera.github.io/wceu-2018/](https://schles
 
 ## ❓ Usage
 
-First, clone this repository to your local computer:
+First, clone these plugins to your local computer from within the wp-plugins folder:
 
 ```bash
 git clone https://github.com/schlessera/wceu-2018-code/
+git clone https://github.com/schlessera/wceu-2018-resources/
 ```
 
-From within that folder, you can checkout branches to a specific step in the workshop:
-
-```bash
-git checkout <branch>
-```
-
-The instructors will let you know what branch to checkout at what point during the workshop.
+Then install the Gutenberg plugin and activate these plugins 

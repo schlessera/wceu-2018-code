@@ -14,13 +14,17 @@ Slides are available at [https://schlessera.github.io/wceu-2018/](https://schles
 
 ## ❓ Usage
 
-First, clone these plugins to your local computer from within the wp-plugins folder:
+First, install and activate the [Gutenberg plugin](https://wordpress.org/plugins/gutenberg/) from the WordPress repository.
+
+Second, clone these plugins to your local computer from within the wp-plugins folder:
 
 ```bash
 git clone https://github.com/schlessera/wceu-2018-code/
 git clone https://github.com/schlessera/wceu-2018-resources/
 ```
 
-Then install the Gutenberg plugin and activate these plugins 
+Third, run composer in both the roots of these plugins.
 
-After that we will explain what's next :)
+And last, activate these plugins.
+
+After that we will explain what's next.

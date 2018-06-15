@@ -14,6 +14,8 @@ Slides are available at [https://schlessera.github.io/wceu-2018/](https://schles
 
 ## ❓ Usage
 
+We assume a clean WordPress installation with a standard WordPress theme like TwentySeventeen.
+
 First, install and activate the [Gutenberg plugin](https://wordpress.org/plugins/gutenberg/) from the WordPress repository.
 
 Second, clone these plugins to your local computer from within the wp-plugins folder:

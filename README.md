@@ -26,7 +26,11 @@ git clone https://github.com/schlessera/wceu-2018-code/
 git clone https://github.com/schlessera/wceu-2018-resources/
 ```
 
-Third, run composer in **both** the roots of these plugins.
+Third, run composer in **both** the roots of these plugins:
+
+```bash
+composer install
+```
 
 And last, activate these plugins.
 

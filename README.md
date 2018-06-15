@@ -10,7 +10,7 @@ This is the code repository for the WordCamp Europe 2018 Workshop ["Dependency I
 
 ## 🖥 Slides
 
-Slides are available at [https://schlessera.github.io/wcldn-2018/](https://schlessera.github.io/wcldn-2018/).
+Slides are available at [https://schlessera.github.io/wceu-2018/](https://schlessera.github.io/wceu-2018/).
 
 ## ❓ Usage
 

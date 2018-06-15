@@ -2,8 +2,6 @@
 
 namespace WordCampEurope\Workshop;
 
-use WordCampEurope\Workshop\ExceptionHandler\AdminNotice;
-
 /*
  * Plugin Name:     WCEU-2018 Workshop Code: Dependency Injection and Design Patterns in Real Life
  * Plugin URI:      https://github.com/schlessera/wceu-2018-code
@@ -20,10 +18,3 @@ $autoloader = __DIR__ . '/vendor/autoload.php';
 if ( is_readable( $autoloader ) ) {
 	include_once $autoloader;
 }
-
-$admin_notice = new AdminNotice();
-$admin_notice->register();
-
-$plugin = new ExceptionHandlerPlugin( new Plugin, $admin_notice );
-
-add_action( 'init', [ $plugin, 'compose' ] );

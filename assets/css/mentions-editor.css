@@ -1,8 +1,0 @@
-/**
- * The following styles get applied inside the editor only.
- */
-
-.wp-block-wceu2018-mentions a {
-	pointer-events: none;
-	cursor: default;
-}

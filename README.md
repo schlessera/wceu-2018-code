@@ -22,3 +22,5 @@ git clone https://github.com/schlessera/wceu-2018-resources/
 ```
 
 Then install the Gutenberg plugin and activate these plugins 
+
+After that we will explain what's next :)
